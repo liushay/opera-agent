@@ -47,14 +47,15 @@ class ChromaKnowledgeBase:
                 filter_docs.append(doc)
         return filter_docs
 
-    # 升级MMR检索，采用as_retriever，支持相似度门槛、候选池fetch_k
+    # 升级MMR检索，采用as_retriever，支持候选池fetch_k
+    # 注意：score_threshold仅适用于similarity_score_threshold检索类型，
+    # mmr模式下透传给max_marginal_relevance_search会报TypeError，因此移除
     def mmr_search(self, query: str):
         retriever = self.vector_store.as_retriever(
             search_type="mmr",
             search_kwargs={
                 "k": config.RETRIEVE_TOP_K,
-                "fetch_k": 6,
-                "score_threshold": config.SIMILARITY_THRESHOLD
+                "fetch_k": 6
             }
         )
         return retriever.invoke(query)

@@ -1,3 +1,4 @@
+from langchain_core.messages import HumanMessage
 from agent.graph_base import build_agent_graph
 from agent.session_memory import get_session_history
 import config
@@ -20,7 +21,7 @@ def run_interactive():
             print(f"切换至会话：{current_sid}")
             continue
         history = get_session_history(current_sid)
-        history.add_message({"type":"human","content":user_input})
+        history.add_message(HumanMessage(content=user_input))
         init_state = {
             "messages": history.messages,
             "user_query": user_input,

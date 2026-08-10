@@ -17,7 +17,6 @@ class AgentState(TypedDict):
     tool_call: dict
     tool_result: str
     reflect_times: int
-    tool_result: str
 
 # 初始化LLM，读取统一配置
 llm = ChatOllama(

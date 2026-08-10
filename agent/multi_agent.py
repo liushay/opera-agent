@@ -49,17 +49,22 @@ def search_worker(state:MultiAgentState)->MultiAgentState:
     task_list = state["sub_task_list"]
     outputs = state["worker_result"]
     need_retry_flag = False
+    retry_times = state["retry_times"]
     for task in task_list:
         if task["worker"] == "search_worker":
             ans = kb.mmr_search(task["task"])
             text_out = "\n".join([doc.page_content for doc in ans])
             if len(text_out.strip()) == 0:
                 print_log("检索工人","检索结果为空，需要重新检索")
-                need_retry_flag = True
+                if retry_times < MAX_RETRY:
+                    need_retry_flag = True
             else:
                 outputs.append({"worker":"search_worker","task":task["task"],"result":text_out})
                 print_log("检索工人",f"执行任务:{task['task']}")
-    return {"worker_result":outputs,"need_retry":need_retry_flag}
+    if need_retry_flag:
+        retry_times += 1
+        print_log("调度路由",f"开启重试，当前次数 {retry_times}")
+    return {"worker_result":outputs,"need_retry":need_retry_flag,"retry_times":retry_times}
 
 # 节点3 计算工人
 @global_exception_handler
@@ -100,11 +105,11 @@ def worker_route(state:MultiAgentState) -> Literal["search_worker","calc_worker"
     return "summary_agent"
 
 # 检索之后的重试路由逻辑
-def search_finish_route(state:MultiAgentState) -> Literal["calc_worker","supervisor_node","summary_agent"]:
+# LangGraph 1.2.9 支持直接返回目标节点名字符串
+def search_finish_route(state:MultiAgentState) -> str:
     workers = [x["worker"] for x in state["sub_task_list"]]
     if state["need_retry"] is True:
         if state["retry_times"] < MAX_RETRY:
-            print_log("调度路由",f"开启重试，当前次数 {state['retry_times']+1}")
             return "supervisor_node"
         else:
             print_log("调度路由","已经到达最大重试上限，停止检索")
