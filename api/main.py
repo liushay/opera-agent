@@ -1,0 +1,129 @@
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import StreamingResponse
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
+from api.schema import ChatRequest, MultiAgentRequest, CommonResponse
+from agent.session_memory import get_session_history
+from agent.graph_base import build_agent_graph
+from agent.multi_agent import build_multi_agent
+from utils.logger import print_log
+from utils.redis_client import init_redis, close_redis
+from api.stream_response import stream_llm_response
+from contextlib import asynccontextmanager
+
+# 1.限速器实例
+limiter = Limiter(key_func=get_remote_address)
+
+# 2.生命周期钩子
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    init_redis()
+    print_log("系统启动", "Redis会话存储初始化成功")
+    yield
+    close_redis()
+    print_log("系统关闭", "Redis连接已经关闭")
+
+# 只新建一次FastAPI实例，挂载生命周期
+app = FastAPI(title="本地Agent知识库后端‑完整版", lifespan=lifespan)
+
+# 绑定限流组件至app
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+# 延后初始化Agent（放到启动事件之后，如果你需要可以改成函数内懒加载）
+single_agent = None
+multi_agent = None
+
+
+@app.on_event("startup")
+async def init_agent_instance():
+    global single_agent, multi_agent
+    single_agent = build_agent_graph()
+    multi_agent = build_multi_agent()
+
+
+@app.post("/api/chat/normal", response_model=CommonResponse)
+async def normal_chat(req: Request, chat_req: ChatRequest):
+    try:
+        await limiter.check(req, "10/minute")
+        history = get_session_history(chat_req.session_id)
+        print_log("普通对话接口", f"会话:{chat_req.session_id} 用户提问:{chat_req.query}")
+        msg_list = await history.aget_messages()
+        agent_input = {
+            "user_query": chat_req.query,
+            "messages": msg_list,
+            "sub_task_list": [],
+            "worker_result": [],
+            "reflect_times": 0
+        }
+        res = single_agent.invoke(agent_input)
+        answer = res["messages"][-1].content
+        await history.aadd_ai_message(answer)
+        return CommonResponse(code=200, msg="请求成功", data={"reply": answer})
+    except RateLimitExceeded:
+        raise HTTPException(status_code=429, detail="访问过于频繁，请稍后重试")
+    except Exception as e:
+        print_log("接口异常", str(e))
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/chat/multi_agent", response_model=CommonResponse)
+async def run_multi_agent(req: Request, multi_req: MultiAgentRequest):
+    try:
+        await limiter.check(req, "8/minute")
+        print_log("多智能体接口", f"会话:{multi_req.session_id} 问题:{multi_req.user_query}")
+        init_state = {
+            "user_query": multi_req.user_query,
+            "sub_task_list": [],
+            "worker_result": [],
+            "messages": []
+        }
+        result = multi_agent.invoke(init_state)
+        ans = result["messages"][-1].content
+        return CommonResponse(code=200, msg="多智能体执行完毕", data={"reply": ans})
+    except RateLimitExceeded:
+        raise HTTPException(status_code=429, detail="访问过于频繁，请稍后重试")
+    except Exception as e:
+        print_log("多Agent接口异常", str(e))
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# 新增流式对话接口，SSE标准响应头 + 保存聊天历史
+@app.post("/api/chat/stream")
+async def stream_chat(req: Request, chat_req: ChatRequest):
+    try:
+        await limiter.check(req, "15/minute")
+        history = get_session_history(chat_req.session_id)
+        msg_arr = await history.aget_messages()
+        prompt_text = f"{msg_arr}\n用户新问题:{chat_req.query}"
+
+        async def generator():
+            full_answer = ""
+            async for chunk in stream_llm_response(prompt_text):
+                full_answer += chunk
+                yield f"data: {chunk}\n\n"
+            # 流式结束之后存入Redis会话
+            await history.aadd_ai_message(full_answer)
+
+        headers = {
+            "Content-Type": "text/event-stream",
+            "Cache-Control": "no-cache",
+            "Connection": "keep‑alive"
+        }
+        return StreamingResponse(generator(), headers=headers)
+    except RateLimitExceeded:
+        raise HTTPException(status_code=429, detail="访问过于频繁，请稍后重试")
+    except Exception as e:
+        print_log("流式接口异常", str(e))
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/health")
+def health_check():
+    return CommonResponse(code=200, msg="服务正常", data={})
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("api.main:app", host="127.0.0.1", port=8000, reload=True)
