@@ -4,6 +4,7 @@ import config
 from kb_manager.chroma_kb import kb
 from kb_manager.bm25_retriever import bm25_kb
 from utils.logger import print_log
+from utils.cache_utils import get_retrieve_cache, set_retrieve_cache, serialize_docs, deserialize_docs
 
 def _normalize_score(scores: List[float]) -> List[float]:
     """最小-最大归一化到 [0,1]"""
@@ -16,13 +17,20 @@ def _normalize_score(scores: List[float]) -> List[float]:
     return [(s - min_s) / (max_s - min_s) for s in scores]
 
 def hybrid_retrieve(query: str) -> List[Document]:
+    cache_raw = get_retrieve_cache(query)
+    if cache_raw is not None:
+        cached_docs = deserialize_docs(cache_raw)
+        print_log("混合检索", f"命中检索缓存，直接返回{len(cached_docs)}条文档")
+        return cached_docs
     """
     混合检索统一入口：BM25关键词 + Chroma向量融合重排
     关闭混合检索时自动降级为原有MMR向量检索
     """
     if not config.ENABLE_HYBRID_SEARCH:
-        # 兼容旧逻辑：纯向量MMR检索
-        return kb.mmr_search(query)
+        vec_docs = kb.mmr_search(query)
+        # 写入缓存
+        set_retrieve_cache(query, serialize_docs(vec_docs))
+        return vec_docs
 
     # 1. 两路召回
     vec_docs = kb.mmr_search(query)  # 向量召回
@@ -65,4 +73,6 @@ def hybrid_retrieve(query: str) -> List[Document]:
     # 在当前函数内执行日志输出
     print_log(tag="混合检索",
               content=f"向量召回{len(vec_docs)}条，BM25召回{len(bm25_pairs)}条，融合后返回{len(final_docs)}条")
+    # 将融合后的文档写入缓存
+    set_retrieve_cache(query, serialize_docs(final_docs))
     return final_docs

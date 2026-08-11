@@ -3,12 +3,15 @@ from fastapi.responses import StreamingResponse
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
+
+import config
 from api.schema import ChatRequest, MultiAgentRequest, CommonResponse
 from agent.session_memory import get_session_history
 from langchain_core.messages import AIMessage, HumanMessage
 from agent.graph_base import build_agent_graph
 from agent.multi_agent import build_multi_agent
 from kb_manager.chroma_kb import kb
+from utils.cache_utils import get_chat_cache, set_chat_cache, clear_all_rag_cache
 from utils.logger import print_log
 from utils.redis_client import init_redis, close_redis
 from api.stream_response import stream_llm_response
@@ -49,6 +52,11 @@ multi_agent = None
 @limiter.limit("10/minute")
 async def normal_chat(request: Request, chat_req: ChatRequest):
     try:
+        cache_reply = get_chat_cache(chat_req.session_id, chat_req.query)
+        if cache_reply is not None:
+            print_log("问答缓存", f"会话{chat_req.session_id}完全命中问答缓存，直接返回")
+            return CommonResponse(code=200, msg="请求成功(缓存命中)", data={"reply": cache_reply})
+
         history = get_session_history(chat_req.session_id)
         print_log("普通对话接口", f"会话:{chat_req.session_id} 用户提问:{chat_req.query}")
         msg_list = await history.aget_messages()
@@ -65,6 +73,9 @@ async def normal_chat(request: Request, chat_req: ChatRequest):
         await history.aadd_messages([HumanMessage(content=chat_req.query)])
         # 保存AI回答到会话记忆
         await history.aadd_messages([AIMessage(content=answer)])
+        # 写入问答缓存
+        set_chat_cache(chat_req.session_id, chat_req.query, answer)
+
         return CommonResponse(code=200, msg="请求成功", data={"reply": answer})
     except RateLimitExceeded:
         raise HTTPException(status_code=429, detail="访问过于频繁，请稍后重试")
@@ -77,6 +88,12 @@ async def normal_chat(request: Request, chat_req: ChatRequest):
 @limiter.limit("8/minute")
 async def run_multi_agent(request: Request, multi_req: MultiAgentRequest):
     try:
+        # Day14新增：问答缓存优先判断（修正变量名）
+        cache_reply = get_chat_cache(multi_req.session_id, multi_req.user_query)
+        if cache_reply is not None:
+            print_log(tag="问答缓存", content=f"会话{multi_req.session_id}完全命中问答缓存，直接返回")
+            return CommonResponse(code=200, msg="请求成功(缓存命中)", data={"reply": cache_reply})
+
         print_log("多智能体接口", f"会话:{multi_req.session_id} 问题:{multi_req.user_query}")
         init_state = {
             "user_query": multi_req.user_query,
@@ -88,6 +105,7 @@ async def run_multi_agent(request: Request, multi_req: MultiAgentRequest):
         }
         result = multi_agent.invoke(init_state)
         ans = result["messages"][-1].content
+        set_chat_cache(multi_req.session_id, multi_req.user_query, ans)
         return CommonResponse(code=200, msg="多智能体执行完毕", data={"reply": ans})
     except RateLimitExceeded:
         raise HTTPException(status_code=429, detail="访问过于频繁，请稍后重试")
@@ -114,6 +132,8 @@ async def stream_chat(request: Request, chat_req: ChatRequest):
                 yield f"data: {chunk}\n\n"
             # 流式结束之后存入Redis会话
             await history.aadd_messages([AIMessage(content=full_answer)])
+            # 流式生成完成写入缓存
+            set_chat_cache(chat_req.session_id, chat_req.query, full_answer)
 
         headers = {
             "Content-Type": "text/event-stream",
@@ -132,6 +152,24 @@ async def stream_chat(request: Request, chat_req: ChatRequest):
 def health_check():
     return CommonResponse(code=200, msg="服务正常", data={})
 
+
+@app.post("/api/cache/clear")
+def clear_cache():
+    count = clear_all_rag_cache()
+    return CommonResponse(code=200, msg=f"成功清空RAG缓存，共删除{count}条", data={"clear_count": count})
+
+@app.get("/api/cache/status")
+def cache_status():
+    """查看缓存总开关状态"""
+    return CommonResponse(
+        code=200,
+        msg="缓存配置状态",
+        data={
+            "enable_cache": config.ENABLE_RAG_CACHE,
+            "retrieve_ttl": config.RETRIEVE_CACHE_TTL,
+            "chat_ttl": config.CHAT_CACHE_TTL
+        }
+    )
 
 if __name__ == "__main__":
     import uvicorn

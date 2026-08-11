@@ -30,3 +30,15 @@ VECTOR_WEIGHT = 0.6
 BM25_WEIGHT = 0.4
 # 是否开启混合检索，False则降级为纯向量检索（兼容旧逻辑）
 ENABLE_HYBRID_SEARCH = True
+
+# 总开关：是否启用缓存
+ENABLE_RAG_CACHE = True
+# 检索文档缓存过期时间 单位：秒 30分钟
+RETRIEVE_CACHE_TTL = 1800
+# 问答完整结果缓存过期时间 单位：秒 2小时
+CHAT_CACHE_TTL = 7200
+# 缓存key前缀区分两层缓存
+RETRIEVE_CACHE_PREFIX = "rag:ret:"
+CHAT_CACHE_PREFIX = "rag:chat:"
+# 相同问题哈希时忽略空格/换行，统一预处理
+CACHE_NORMALIZE_WHITESPACE = True
