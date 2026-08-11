@@ -2,6 +2,7 @@ from langchain_chroma import Chroma
 from langchain_ollama import OllamaEmbeddings
 from utils.doc_split_utils import DocProcessor
 import config
+from kb_manager.bm25_retriever import bm25_kb
 
 
 class ChromaKnowledgeBase:
@@ -34,7 +35,19 @@ class ChromaKnowledgeBase:
             print(f"文件{file_path}内容已存在向量库，无需新增")
             return
         self.vector_store.add_texts(texts=new_texts, metadatas=new_metas)
-        print(f"成功新增{len(new_texts)}条文本块至向量库")
+        # 同步增量更新BM25索引
+        bm25_kb.add_texts(new_texts, new_metas)
+        print(f"成功新增{len(new_texts)}条文本块至向量库 & BM25索引")
+
+    # 全量重建BM25方法
+    def rebuild_full_bm25(self):
+        """读取Chroma全部数据，完整重建BM25索引（初始化/清空库后调用）"""
+        all_data = self.vector_store.get()
+        all_texts = all_data["documents"]
+        all_metas = all_data["metadatas"]
+        corpus = list(zip(all_texts, all_metas))
+        bm25_kb.rebuild_index(corpus)
+        print("BM25索引全量重建完成")
 
     # 基础相似度检索 + 距离阈值过滤
     def similarity_search_filter(self, query: str):
@@ -69,6 +82,7 @@ class ChromaKnowledgeBase:
     def clear_kb(self):
         self.vector_store.delete_collection()
         print("向量库已清空")
+        self.rebuild_full_bm25()
 
 
 # 全局单例，项目各处统一导入

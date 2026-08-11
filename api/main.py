@@ -8,6 +8,7 @@ from agent.session_memory import get_session_history
 from langchain_core.messages import AIMessage, HumanMessage
 from agent.graph_base import build_agent_graph
 from agent.multi_agent import build_multi_agent
+from kb_manager.chroma_kb import kb
 from utils.logger import print_log
 from utils.redis_client import init_redis, close_redis
 from api.stream_response import stream_llm_response
@@ -21,6 +22,9 @@ limiter = Limiter(key_func=get_remote_address)
 async def lifespan(app: FastAPI):
     init_redis()
     print_log("系统启动", "Redis会话存储初始化成功")
+    # Day13新增：启动时重建BM25索引
+    kb.rebuild_full_bm25()
+    print_log("系统启动", "混合检索BM25索引加载完成")
     # 初始化Agent实例（原startup事件逻辑移入lifespan，消除冲突）
     global single_agent, multi_agent
     single_agent = build_agent_graph()

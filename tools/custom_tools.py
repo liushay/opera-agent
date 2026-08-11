@@ -1,6 +1,7 @@
 from langchain_core.tools import StructuredTool
 from langchain_chroma import Chroma
 from langchain_ollama import OllamaEmbeddings
+from kb_manager.hybrid_search import hybrid_retrieve
 
 import config
 
@@ -19,7 +20,7 @@ def search_knowledge_base(query: str) -> str:
     参数query：用户的技术问题文本
     返回知识库匹配的参考文档内容
     """
-    docs = retriever.invoke(query)
+    docs = hybrid_retrieve(query)
     res_text = "\n".join([f"文档片段：{doc.page_content}，来源：{doc.metadata}" for doc in docs])
     return res_text
 

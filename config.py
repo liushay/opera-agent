@@ -19,3 +19,14 @@ MAX_REFLECT_TIMES = 2
 # 会话配置
 DEFAULT_SESSION_ID = "user_001"
 
+# BM25关键词检索召回条数
+BM25_TOP_K = 3
+# 向量检索召回条数
+VECTOR_TOP_K = 3
+# 混合后最终返回文档数量
+HYBRID_FINAL_K = 3
+# 分数权重：向量分数权重 / BM25分数权重（可动态调参）
+VECTOR_WEIGHT = 0.6
+BM25_WEIGHT = 0.4
+# 是否开启混合检索，False则降级为纯向量检索（兼容旧逻辑）
+ENABLE_HYBRID_SEARCH = True

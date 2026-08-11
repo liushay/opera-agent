@@ -13,6 +13,7 @@ import config
 from kb_manager.chroma_kb import kb
 from utils.logger import print_log
 from utils.exception_handler import global_exception_handler
+from kb_manager.hybrid_search import hybrid_retrieve
 
 llm = ChatOllama(model=config.LLM_MODEL,temperature=config.LLM_TEMP)
 MAX_RETRY = 2
@@ -52,7 +53,7 @@ def search_worker(state:MultiAgentState)->MultiAgentState:
     retry_times = state["retry_times"]
     for task in task_list:
         if task["worker"] == "search_worker":
-            ans = kb.mmr_search(task["task"])
+            ans = hybrid_retrieve(task["task"])
             text_out = "\n".join([doc.page_content for doc in ans])
             if len(text_out.strip()) == 0:
                 print_log("检索工人","检索结果为空，需要重新检索")
