@@ -1,8 +1,12 @@
 import hashlib
 import json
-from utils.redis_client import redis_client
+import utils.redis_client as redis_module
 import config
 from utils.logger import print_log
+
+def _get_redis_client():
+    """动态获取最新 redis_client 实例（避免 from-import 值绑定导致永远为 None）"""
+    return redis_module.redis_client
 
 def normalize_query(text: str) -> str:
     """统一格式化问题：去除换行、多余空格，用于生成缓存key"""
@@ -18,6 +22,7 @@ def get_query_hash(query: str) -> str:
 # ========= 检索缓存通用方法 =========
 def get_retrieve_cache(query: str):
     """读取检索缓存，返回序列化文档列表；无缓存返回None"""
+    redis_client = _get_redis_client()
     if not config.ENABLE_RAG_CACHE or redis_client is None:
         return None
     key = f"{config.RETRIEVE_CACHE_PREFIX}{get_query_hash(query)}"
@@ -33,6 +38,7 @@ def get_retrieve_cache(query: str):
 
 def set_retrieve_cache(query: str, docs_data: list):
     """写入检索结果缓存，自动设置过期时间"""
+    redis_client = _get_redis_client()
     if not config.ENABLE_RAG_CACHE or redis_client is None:
         return
     key = f"{config.RETRIEVE_CACHE_PREFIX}{get_query_hash(query)}"
@@ -46,6 +52,7 @@ def set_retrieve_cache(query: str, docs_data: list):
 # ========= 问答会话缓存通用方法 =========
 def get_chat_cache(session_id: str, query: str):
     """会话+问题双维度缓存，区分不同用户会话"""
+    redis_client = _get_redis_client()
     if not config.ENABLE_RAG_CACHE or redis_client is None:
         return None
     hash_q = get_query_hash(query)
@@ -62,6 +69,7 @@ def get_chat_cache(session_id: str, query: str):
 
 def set_chat_cache(session_id: str, query: str, reply: str):
     """保存会话问答缓存"""
+    redis_client = _get_redis_client()
     if not config.ENABLE_RAG_CACHE or redis_client is None:
         return
     hash_q = get_query_hash(query)
@@ -73,6 +81,7 @@ def set_chat_cache(session_id: str, query: str, reply: str):
 # ========= 缓存清理工具 =========
 def clear_all_rag_cache():
     """清空所有RAG相关缓存"""
+    redis_client = _get_redis_client()
     if redis_client is None:
         return
     retrieve_keys = redis_client.keys(f"{config.RETRIEVE_CACHE_PREFIX}*")

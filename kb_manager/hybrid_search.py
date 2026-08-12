@@ -17,15 +17,16 @@ def _normalize_score(scores: List[float]) -> List[float]:
     return [(s - min_s) / (max_s - min_s) for s in scores]
 
 def hybrid_retrieve(query: str) -> List[Document]:
+    """
+        混合检索统一入口：BM25关键词 + Chroma向量融合重排
+        关闭混合检索时自动降级为原有MMR向量检索
+        """
     cache_raw = get_retrieve_cache(query)
     if cache_raw is not None:
         cached_docs = deserialize_docs(cache_raw)
         print_log("混合检索", f"命中检索缓存，直接返回{len(cached_docs)}条文档")
         return cached_docs
-    """
-    混合检索统一入口：BM25关键词 + Chroma向量融合重排
-    关闭混合检索时自动降级为原有MMR向量检索
-    """
+
     if not config.ENABLE_HYBRID_SEARCH:
         vec_docs = kb.mmr_search(query)
         # 写入缓存
