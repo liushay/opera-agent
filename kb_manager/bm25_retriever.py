@@ -57,7 +57,8 @@ class BM25Retriever:
         top_pairs = doc_score_pairs[:top_k]
         res = []
         for text, meta, score in top_pairs:
-            doc = Document(page_content=text, metadata=meta)
+            # 容错处理：metadata为None时自动赋值为空字典{}，避免Pydantic校验报错
+            doc = Document(page_content=text, metadata=meta or {})
             res.append((doc, float(score)))
         return res
 

@@ -22,7 +22,8 @@ class ChromaKnowledgeBase:
         raw_docs = self.processor.load_file(file_path)
         chunk_data = self.processor.split_docs(raw_docs)
         texts = [item["text"] for item in chunk_data]
-        metadatas = [item["source"] for item in chunk_data]
+        # 关键1：None兜底为空字典
+        metadatas = [item["source"] or {} for item in chunk_data]
 
         exist_metas = self.get_all_metadata()
         new_texts, new_metas = [], []
@@ -34,9 +35,11 @@ class ChromaKnowledgeBase:
         if len(new_texts) == 0:
             print(f"文件{file_path}内容已存在向量库，无需新增")
             return
-        self.vector_store.add_texts(texts=new_texts, metadatas=new_metas)
+        # 关键2：再次兜底，杜绝None
+        safe_metas = [meta or {} for meta in new_metas]
+        self.vector_store.add_texts(texts=new_texts, metadatas=safe_metas)
         # 同步增量更新BM25索引
-        bm25_kb.add_texts(new_texts, new_metas)
+        bm25_kb.add_texts(new_texts, safe_metas)
         print(f"成功新增{len(new_texts)}条文本块至向量库 & BM25索引")
 
     # 全量重建BM25方法
@@ -57,6 +60,8 @@ class ChromaKnowledgeBase:
         filter_docs = []
         for doc, score in docs_with_score:
             if score < config.SIMILARITY_THRESHOLD:
+                # 容错处理：metadata为None时自动赋值为空字典{}，避免Pydantic校验报错
+                doc.metadata = doc.metadata or {}
                 filter_docs.append(doc)
         return filter_docs
 
@@ -71,7 +76,11 @@ class ChromaKnowledgeBase:
                 "fetch_k": 6
             }
         )
-        return retriever.invoke(query)
+        docs = retriever.invoke(query)
+        # 容错处理：metadata为None时自动赋值为空字典{}，避免Pydantic校验报错
+        for doc in docs:
+            doc.metadata = doc.metadata or {}
+        return docs
 
     # 获取库内全部元数据，用于文件增量入库去重
     def get_all_metadata(self):

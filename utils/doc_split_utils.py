@@ -24,9 +24,10 @@ class DocProcessor:
         for doc in docs:
             chunks = self.splitter.split_text(doc.page_content)
             for chunk in chunks:
+                meta = doc.metadata or {}  # 关键修复，None替换为空字典
                 all_chunks.append({
                     "text": chunk,
-                    "source": doc.metadata
+                    "source": meta
                 })
         return all_chunks
 

@@ -99,7 +99,8 @@ def serialize_docs(docs):
     for doc in docs:
         res.append({
             "page_content": doc.page_content,
-            "metadata": doc.metadata
+            # 容错处理：metadata为None时自动赋值为空字典{}，避免Pydantic校验报错
+            "metadata": doc.metadata or {}
         })
     return res
 
@@ -108,5 +109,25 @@ def deserialize_docs(doc_dict_list):
     from langchain_core.documents import Document
     docs = []
     for d in doc_dict_list:
-        docs.append(Document(page_content=d["page_content"], metadata=d["metadata"]))
+        try:
+            # 容错处理1：page_content键缺失或为空时跳过该条（不创建空文档），
+            # 防止脏缓存产生"看似有效实际无效"的文档导致上层重试死循环
+            page_content = d.get("page_content") or ""
+            if not page_content:
+                continue
+            # 容错处理2：metadata键缺失或为None时自动赋值为空字典{}，避免Pydantic校验报错
+            metadata = d.get("metadata") or {}
+            docs.append(Document(page_content=page_content, metadata=metadata))
+        except Exception:
+            # 单条文档反序列化失败则跳过该条，防止脏缓存导致整体失败并触发上层死循环重试
+            continue
     return docs
+
+def delete_retrieve_cache(query: str):
+    """删除指定查询的检索缓存（脏数据处理，防止死循环重复命中同一缓存）"""
+    redis_client = _get_redis_client()
+    if redis_client is None:
+        return
+    key = f"{config.RETRIEVE_CACHE_PREFIX}{get_query_hash(query)}"
+    redis_client.delete(key)
+    print_log("检索缓存", f"清除检索脏缓存 key={key}")

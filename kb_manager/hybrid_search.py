@@ -4,7 +4,7 @@ import config
 from kb_manager.chroma_kb import kb
 from kb_manager.bm25_retriever import bm25_kb
 from utils.logger import print_log
-from utils.cache_utils import get_retrieve_cache, set_retrieve_cache, serialize_docs, deserialize_docs
+from utils.cache_utils import get_retrieve_cache, set_retrieve_cache, delete_retrieve_cache, serialize_docs, deserialize_docs
 
 def _normalize_score(scores: List[float]) -> List[float]:
     """最小-最大归一化到 [0,1]"""
@@ -24,8 +24,16 @@ def hybrid_retrieve(query: str) -> List[Document]:
     cache_raw = get_retrieve_cache(query)
     if cache_raw is not None:
         cached_docs = deserialize_docs(cache_raw)
-        print_log("混合检索", f"命中检索缓存，直接返回{len(cached_docs)}条文档")
-        return cached_docs
+        # 断点校验：缓存命中后校验文档有效性与metadata，防死循环
+        if len(cached_docs) == 0:
+            # 缓存数据无效（反序列化后无有效文档），清除脏缓存，
+            # 继续走正常混合检索流程，避免上层反复重试命中同一脏缓存形成死循环
+            print_log("混合检索", "缓存命中但文档无效，清除脏缓存后重新执行检索")
+            delete_retrieve_cache(query)
+        else:
+            # 缓存命中且文档有效，正常返回给上层调用，退出检索函数
+            print_log("混合检索", f"命中检索缓存，直接返回{len(cached_docs)}条文档")
+            return cached_docs
 
     if not config.ENABLE_HYBRID_SEARCH:
         vec_docs = kb.mmr_search(query)
