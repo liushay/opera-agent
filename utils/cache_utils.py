@@ -9,10 +9,11 @@ def _get_redis_client():
     return redis_module.redis_client
 
 def normalize_query(text: str) -> str:
-    """统一格式化问题：去除换行、多余空格，用于生成缓存key"""
+    """统一格式化问题：清除全部空白字符（空格/tab/换行），用于生成缓存key"""
     if not config.CACHE_NORMALIZE_WHITESPACE:
         return text.strip()
-    return " ".join(text.strip().split())
+    # 去除全部空白字符：空格、tab、换行等，保证空格变体问句命中同一缓存key
+    return "".join(text.split())
 
 def get_query_hash(query: str) -> str:
     """将标准化后的问题转为md5哈希，缩短缓存key长度"""
