@@ -1,6 +1,10 @@
 from langchain_community.document_loaders import TextLoader, PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
+from utils.logger import log_error
+from utils.rag_exceptions import DocProcessException
+
+
 class DocProcessor:
     def __init__(self, chunk_size=120, chunk_overlap=15):
         self.splitter = RecursiveCharacterTextSplitter(
@@ -10,14 +14,18 @@ class DocProcessor:
         )
 
     def load_file(self, file_path: str):
-        # txt、md都用轻量TextLoader读取，无额外依赖
-        if file_path.endswith(".txt") or file_path.endswith(".md"):
-            loader = TextLoader(file_path, encoding="utf-8")
-        elif file_path.endswith(".pdf"):
-            loader = PyPDFLoader(file_path)
-        else:
-            raise Exception("仅支持txt/md/pdf格式")
-        return loader.load()
+        try:
+            if file_path.endswith(".txt") or file_path.endswith(".md"):
+                loader = TextLoader(file_path, encoding="utf-8")
+            elif file_path.endswith(".pdf"):
+                loader = PyPDFLoader(file_path)
+            else:
+                raise Exception("仅支持txt/md/pdf格式")
+            return loader.load()
+        except Exception as e:
+            err = DocProcessException(f"加载文件{file_path}失败", e)
+            log_error("文档加载异常", err.msg, e)
+            raise err
 
     def split_docs(self, docs):
         all_chunks = []

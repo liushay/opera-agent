@@ -5,6 +5,10 @@ import config
 from utils.doc_split_utils import DocProcessor
 import jieba
 
+from utils.logger import log_warn, log_error
+from utils.rag_exceptions import BM25IndexException
+
+
 class BM25Retriever:
     def __init__(self):
         self.processor = DocProcessor(
@@ -47,9 +51,15 @@ class BM25Retriever:
         BM25检索，返回 (Document, bm25分数)
         """
         if not self.bm25_index:
-            return []
-        query_tokens = self._tokenize(query)
-        scores = self.bm25_index.get_scores(query_tokens)
+            log_warn("BM25检索", "BM25索引未初始化，直接返回空结果")
+            raise BM25IndexException("BM25索引不存在，请先重建索引")
+        try:
+            query_tokens = self._tokenize(query)
+            scores = self.bm25_index.get_scores(query_tokens)
+        except Exception as e:
+            err = BM25IndexException("BM25检索计算分数失败", e)
+            log_error("BM25检索异常", err.msg, e)
+            raise err
         # 绑定文档+分数并排序
         doc_score_pairs = list(zip(self.corpus_texts, self.corpus_metas, scores))
         doc_score_pairs.sort(key=lambda x: x[2], reverse=True)

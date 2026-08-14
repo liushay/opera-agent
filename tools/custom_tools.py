@@ -2,10 +2,10 @@ from langchain_core.tools import StructuredTool
 from langchain_chroma import Chroma
 from langchain_ollama import OllamaEmbeddings
 from kb_manager.hybrid_search import hybrid_retrieve
-
 import config
+from utils.logger import log_info, log_warn, log_error
+from utils.rag_exceptions import VectorStoreException, BM25IndexException
 
-# 初始化向量库
 embedding = OllamaEmbeddings(model=config.EMBED_MODEL)
 vector_store = Chroma(
     persist_directory=config.CHROMA_PERSIST_PATH,
@@ -15,24 +15,33 @@ retriever = vector_store.as_retriever(search_kwargs={"k": config.RETRIEVE_TOP_K}
 
 # 工具1：知识库检索工具
 def search_knowledge_base(query: str) -> str:
+    """从本地知识库检索和问题相关的文档内容
+    query: 用户待检索的查询文本
     """
-    当用户询问RAG、LangChain、文本分块、向量库相关技术问题时调用此工具
-    参数query：用户的技术问题文本
-    返回知识库匹配的参考文档内容
-    """
-    docs = hybrid_retrieve(query)
+    log_info("知识库工具", f"执行检索工具，query={query}")
+    try:
+        docs = hybrid_retrieve(query)
+    except (VectorStoreException, BM25IndexException) as e:
+        log_error("知识库工具检索失败", "检索底层异常", e)
+        # 检索异常直接向上抛出，上层Agent捕获为流程异常
+        raise e
+
+    if not docs:
+        log_warn("知识库工具", "检索结果为空文档")
+        return "知识库未查询到相关内容"
+
     res_text = "\n".join([f"文档片段：{doc.page_content}，来源：{doc.metadata}" for doc in docs])
+    log_info("知识库工具", f"检索成功，返回{len(docs)}条文档")
     return res_text
 
 # 工具2：数学计算器工具
 def calculator(a: float, b: float, op: str) -> str:
+    """执行两个数字的四则运算
+    a: 第一个运算数字
+    b: 第二个运算数字
+    op: 运算符，仅支持 + - * /
     """
-    仅用于数学四则运算，用户需要计算数字时调用
-    参数a：第一个数字，浮点数
-    参数b：第二个数字，浮点数
-    参数op：运算符，仅支持 + - * /
-    返回计算结果字符串
-    """
+    log_info("计算工具", f"执行计算 {a} {op} {b}")
     if op == "+":
         result = a + b
     elif op == "-":
@@ -41,14 +50,15 @@ def calculator(a: float, b: float, op: str) -> str:
         result = a * b
     elif op == "/":
         if b == 0:
+            log_warn("计算工具", "除数为0，计算失败")
             return "错误：除数不能为0"
         result = a / b
     else:
+        log_warn("计算工具", f"不支持运算符：{op}")
         return "不支持该运算符，仅支持 + - * /"
+    log_info("计算工具", f"计算完成，结果={result}")
     return f"计算结果：{a} {op} {b} = {result}"
 
-# 转为LangChain标准结构化工具
 knowledge_tool = StructuredTool.from_function(search_knowledge_base)
 calc_tool = StructuredTool.from_function(calculator)
-# 工具列表，提供给模型识别
 tool_list = [knowledge_tool, calc_tool]

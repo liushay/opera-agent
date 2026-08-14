@@ -34,11 +34,23 @@ ENABLE_HYBRID_SEARCH = True
 # 总开关：是否启用缓存
 ENABLE_RAG_CACHE = True
 # 检索文档缓存过期时间 单位：秒 30分钟
-RETRIEVE_CACHE_TTL = 1800
+RETRIEVE_CACHE_TTL = 10
 # 问答完整结果缓存过期时间 单位：秒 2小时
-CHAT_CACHE_TTL = 7200
+CHAT_CACHE_TTL = 10
 # 缓存key前缀区分两层缓存
 RETRIEVE_CACHE_PREFIX = "rag:ret:"
 CHAT_CACHE_PREFIX = "rag:chat:"
 # 相同问题哈希时忽略空格/换行，统一预处理
 CACHE_NORMALIZE_WHITESPACE = True
+
+# ========= Day15 日志配置 =========
+# 日志级别：DEBUG/INFO/WARNING/ERROR
+LOG_LEVEL = "INFO"
+# 是否将日志写入本地文件
+LOG_TO_FILE = True
+# 日志文件存放目录
+LOG_SAVE_PATH = "./logs"
+# 单个日志最大MB，滚动分割
+LOG_MAX_SIZE_MB = 10
+# 保留日志文件数量
+LOG_BACKUP_COUNT = 7

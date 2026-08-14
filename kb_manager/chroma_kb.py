@@ -3,19 +3,23 @@ from langchain_ollama import OllamaEmbeddings
 from utils.doc_split_utils import DocProcessor
 import config
 from kb_manager.bm25_retriever import bm25_kb
+from utils.logger import log_info, log_error
+from utils.rag_exceptions import VectorStoreException
 
 
 class ChromaKnowledgeBase:
     def __init__(self):
-        self.embedding = OllamaEmbeddings(model=config.EMBED_MODEL)
-        self.vector_store = Chroma(
-            persist_directory=config.CHROMA_PERSIST_PATH,
-            embedding_function=self.embedding
-        )
-        self.processor = DocProcessor(
-            chunk_size=config.CHUNK_SIZE,
-            chunk_overlap=config.CHUNK_OVERLAP
-        )
+        try:
+            self.embedding = OllamaEmbeddings(model=config.EMBED_MODEL)
+            self.vector_store = Chroma(
+                persist_directory=config.CHROMA_PERSIST_PATH,
+                embedding_function=self.embedding
+            )
+            log_info("向量库初始化", "Chroma向量库加载完成")
+        except Exception as e:
+            err = VectorStoreException("Chroma向量库初始化失败，磁盘路径无权限或嵌入模型不可用", e)
+            log_error("向量库初始化失败", err.msg, e)
+            raise err
 
     # 增量加载单个文件，依据文件source元数据去重
     def add_file_increment(self, file_path: str):

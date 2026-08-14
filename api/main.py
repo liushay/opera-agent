@@ -12,10 +12,13 @@ from agent.graph_base import build_agent_graph
 from agent.multi_agent import build_multi_agent
 from kb_manager.chroma_kb import kb
 from utils.cache_utils import get_chat_cache, set_chat_cache, clear_all_rag_cache
-from utils.logger import print_log
+from utils.logger import print_log, log_info
 from utils.redis_client import init_redis, close_redis
 from api.stream_response import stream_llm_response
 from contextlib import asynccontextmanager
+from utils.rag_exceptions import BaseRAGException
+from utils.logger import log_error
+from fastapi.responses import JSONResponse
 
 # 1.限速器实例
 limiter = Limiter(key_func=get_remote_address)
@@ -38,6 +41,32 @@ async def lifespan(app: FastAPI):
 
 # 只新建一次FastAPI实例，挂载生命周期
 app = FastAPI(title="本地Agent知识库后端‑完整版", lifespan=lifespan)
+
+# 业务自定义RAG异常捕获
+@app.exception_handler(BaseRAGException)
+async def rag_exception_handler(request: Request, exc: BaseRAGException):
+    log_error(f"业务异常{exc.code}", f"{exc.msg} 原始错误：{str(exc.origin_err)}", exc.origin_err)
+    return JSONResponse(
+        status_code=500,
+        content={
+            "code": exc.code,
+            "msg": exc.msg,
+            "detail": str(exc.origin_err) if exc.origin_err else ""
+        }
+    )
+
+# 通用未知系统异常捕获
+@app.exception_handler(Exception)
+async def global_unknown_exception_handler(request: Request, exc: Exception):
+    log_error("系统未知异常", f"接口全局捕获未处理错误：{str(exc)}", exc)
+    return JSONResponse(
+        status_code=500,
+        content={
+            "code": 9999,
+            "msg": "服务内部未知错误，请查看日志排查",
+            "detail": str(exc)
+        }
+    )
 
 # 绑定限流组件至app
 app.state.limiter = limiter
@@ -171,6 +200,21 @@ def cache_status():
         }
     )
 
+@app.post("/api/log/level")
+def set_log_level(level: str):
+    import logging
+    from utils.logger import global_logger
+    level_map = {
+        "DEBUG": logging.DEBUG,
+        "INFO": logging.INFO,
+        "WARNING": logging.WARNING,
+        "ERROR": logging.ERROR
+    }
+    if level not in level_map:
+        return CommonResponse(code=400, msg="级别仅支持 DEBUG/INFO/WARNING/ERROR", data={})
+    global_logger.setLevel(level_map[level])
+    log_info("日志配置", f"动态修改日志级别为{level}")
+    return CommonResponse(code=200, msg=f"日志级别已切换至{level}", data={"current_level": level})
 
 if __name__ == "__main__":
     import uvicorn
