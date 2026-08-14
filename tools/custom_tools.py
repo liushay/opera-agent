@@ -1,7 +1,7 @@
 from langchain_core.tools import StructuredTool
 from langchain_chroma import Chroma
 from langchain_ollama import OllamaEmbeddings
-from kb_manager.hybrid_search import hybrid_retrieve
+from rag.vectorstore import kb, bm25_kb, hybrid_retrieve
 import config
 from utils.logger import log_info, log_warn, log_error
 from utils.rag_exceptions import VectorStoreException, BM25IndexException

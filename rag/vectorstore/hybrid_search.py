@@ -1,8 +1,8 @@
 from typing import List, Dict, Tuple
 from langchain_core.documents import Document
 import config
-from kb_manager.chroma_kb import kb
-from kb_manager.bm25_retriever import bm25_kb
+from rag.vectorstore.chroma_kb import kb
+from  rag.vectorstore.bm25_retriever import bm25_kb
 from utils.logger import log_debug, log_info, log_warn, log_error
 from utils.cache_utils import get_retrieve_cache, set_retrieve_cache, delete_retrieve_cache, serialize_docs, deserialize_docs
 from utils.rag_exceptions import VectorStoreException, BM25IndexException, CacheSerializeException

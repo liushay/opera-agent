@@ -10,7 +10,8 @@ from agent.session_memory import get_session_history
 from langchain_core.messages import AIMessage, HumanMessage
 from agent.graph_base import build_agent_graph
 from agent.multi_agent import build_multi_agent
-from kb_manager.chroma_kb import kb
+from rag.vectorstore import kb, bm25_kb, hybrid_retrieve
+from rag.chain import rag_chain
 from utils.cache_utils import get_chat_cache, set_chat_cache, clear_all_rag_cache
 from utils.logger import print_log, log_info
 from utils.redis_client import init_redis, close_redis

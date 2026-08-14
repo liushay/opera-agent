@@ -9,10 +9,10 @@ from langchain_core.messages import BaseMessage,HumanMessage,AIMessage
 from langgraph.graph import StateGraph,END
 from langchain_ollama import ChatOllama
 import config
-from kb_manager.chroma_kb import kb
 from utils.logger import log_debug, log_info, log_warn, log_error
 from utils.exception_handler import global_exception_handler
-from kb_manager.hybrid_search import hybrid_retrieve
+from rag.vectorstore import chroma_kb, hybrid_retrieve
+from rag.chain import rag_chain
 from utils.rag_exceptions import LLMModelException, AgentFlowException, VectorStoreException, BM25IndexException
 
 # LLM初始化

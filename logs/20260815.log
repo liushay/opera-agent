@@ -259,3 +259,175 @@ httpx.ConnectError: [WinError 10061] 由于目标计算机积极拒绝，无法�
 2026-08-15 01:32:15 | INFO | rag_main | 【缓存全局清理】成功清空RAG缓存，共删除3条key
 2026-08-15 01:35:17 | INFO | rag_main | 【Redis关闭】Redis连接正常关闭
 2026-08-15 01:35:17 | INFO | rag_main | 【系统关闭】Redis连接已经关闭
+2026-08-15 01:49:43 | ERROR | rag_main | 【文档加载】文件不存在：你的测试文档.pdf
+2026-08-15 01:50:00 | INFO | rag_main | 【文档加载】成功读取文件 test.pdf，原始文档数：3
+2026-08-15 01:50:00 | INFO | rag_main | 【文本分割】原始文档分割完成，生成文本块总数：18
+2026-08-15 02:04:28 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:10:31 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:10:33 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:13:12 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:13:14 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:15:13 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:15:14 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:15:15 | ERROR | rag_main | 【文档加载】文件不存在：测试文档.pdf
+2026-08-15 02:17:00 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:17:01 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:17:03 | INFO | rag_main | 【文档加载】成功读取文件 test.pdf，原始文档数：3
+2026-08-15 02:17:03 | INFO | rag_main | 【文本分割】原始文档分割完成，生成文本块总数：18
+2026-08-15 02:21:56 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:21:58 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:22:00 | INFO | rag_main | 【文档加载】成功读取文件 test.pdf，原始文档数：3
+2026-08-15 02:22:00 | INFO | rag_main | 【文本分割】原始文档分割完成，生成文本块总数：18
+2026-08-15 02:22:00 | INFO | rag_main | 【混合检索】开始执行检索，query=什么是RAG
+2026-08-15 02:22:00 | WARNING | rag_main | 【检索缓存读取】Redis未初始化，禁用缓存读取 key=rag:ret:dd7e812a95fa65bce1f50b132472f79b
+2026-08-15 02:22:04 | WARNING | rag_main | 【BM25检索】BM25索引未初始化，直接返回空结果
+2026-08-15 02:22:04 | WARNING | rag_main | 【混合检索】BM25索引异常，仅使用向量检索结果
+Traceback (most recent call last):
+  File "D:\agent-study\Agent_Study_Day1\rag\vectorstore\hybrid_search.py", line 60, in hybrid_retrieve
+    bm25_pairs = bm25_kb.search(query, top_k=config.BM25_TOP_K)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\kb_manager\bm25_retriever.py", line 55, in search
+    raise BM25IndexException("BM25索引不存在，请先重建索引")
+utils.rag_exceptions.BM25IndexException: BM25索引不存在，请先重建索引
+2026-08-15 02:22:04 | INFO | rag_main | 【混合检索】向量召回3条，BM25召回0条，融合后返回3条
+2026-08-15 02:22:04 | WARNING | rag_main | 【检索缓存写入】Redis未初始化，无法写入缓存 key=rag:ret:dd7e812a95fa65bce1f50b132472f79b
+2026-08-15 02:25:45 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:25:47 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:28:46 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:28:47 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:28:52 | INFO | rag_main | 【混合检索】开始执行检索，query=什么是RAG
+2026-08-15 02:28:52 | WARNING | rag_main | 【检索缓存读取】Redis未初始化，禁用缓存读取 key=rag:ret:dd7e812a95fa65bce1f50b132472f79b
+2026-08-15 02:28:55 | WARNING | rag_main | 【BM25检索】BM25索引未初始化，直接返回空结果
+2026-08-15 02:28:55 | WARNING | rag_main | 【混合检索】BM25索引异常，仅使用向量检索结果
+Traceback (most recent call last):
+  File "D:\agent-study\Agent_Study_Day1\rag\vectorstore\hybrid_search.py", line 60, in hybrid_retrieve
+    bm25_pairs = bm25_kb.search(query, top_k=config.BM25_TOP_K)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\kb_manager\bm25_retriever.py", line 55, in search
+    raise BM25IndexException("BM25索引不存在，请先重建索引")
+utils.rag_exceptions.BM25IndexException: BM25索引不存在，请先重建索引
+2026-08-15 02:28:55 | INFO | rag_main | 【混合检索】向量召回3条，BM25召回0条，融合后返回3条
+2026-08-15 02:28:55 | WARNING | rag_main | 【检索缓存写入】Redis未初始化，无法写入缓存 key=rag:ret:dd7e812a95fa65bce1f50b132472f79b
+2026-08-15 02:28:55 | INFO | rag_main | 【RAG链路】执行同步问答，检索文档3条
+2026-08-15 02:29:44 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:29:46 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:29:51 | INFO | rag_main | 【混合检索】开始执行检索，query=什么是RAG
+2026-08-15 02:29:51 | WARNING | rag_main | 【检索缓存读取】Redis未初始化，禁用缓存读取 key=rag:ret:dd7e812a95fa65bce1f50b132472f79b
+2026-08-15 02:29:51 | WARNING | rag_main | 【BM25检索】BM25索引未初始化，直接返回空结果
+2026-08-15 02:29:51 | WARNING | rag_main | 【混合检索】BM25索引异常，仅使用向量检索结果
+Traceback (most recent call last):
+  File "D:\agent-study\Agent_Study_Day1\rag\vectorstore\hybrid_search.py", line 60, in hybrid_retrieve
+    bm25_pairs = bm25_kb.search(query, top_k=config.BM25_TOP_K)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\kb_manager\bm25_retriever.py", line 55, in search
+    raise BM25IndexException("BM25索引不存在，请先重建索引")
+utils.rag_exceptions.BM25IndexException: BM25索引不存在，请先重建索引
+2026-08-15 02:29:51 | INFO | rag_main | 【混合检索】向量召回3条，BM25召回0条，融合后返回3条
+2026-08-15 02:29:51 | WARNING | rag_main | 【检索缓存写入】Redis未初始化，无法写入缓存 key=rag:ret:dd7e812a95fa65bce1f50b132472f79b
+2026-08-15 02:29:51 | INFO | rag_main | 【RAG链路】执行同步问答，检索文档3条
+2026-08-15 02:35:28 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:35:30 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:35:34 | INFO | rag_main | 【混合检索】开始执行检索，query=什么是RAG
+2026-08-15 02:35:34 | WARNING | rag_main | 【检索缓存读取】Redis未初始化，禁用缓存读取 key=rag:ret:dd7e812a95fa65bce1f50b132472f79b
+2026-08-15 02:35:37 | WARNING | rag_main | 【BM25检索】BM25索引未初始化，直接返回空结果
+2026-08-15 02:35:37 | WARNING | rag_main | 【混合检索】BM25索引异常，仅使用向量检索结果
+Traceback (most recent call last):
+  File "D:\agent-study\Agent_Study_Day1\rag\vectorstore\hybrid_search.py", line 60, in hybrid_retrieve
+    bm25_pairs = bm25_kb.search(query, top_k=config.BM25_TOP_K)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\kb_manager\bm25_retriever.py", line 55, in search
+    raise BM25IndexException("BM25索引不存在，请先重建索引")
+utils.rag_exceptions.BM25IndexException: BM25索引不存在，请先重建索引
+2026-08-15 02:35:38 | INFO | rag_main | 【混合检索】向量召回3条，BM25召回0条，融合后返回3条
+2026-08-15 02:35:38 | WARNING | rag_main | 【检索缓存写入】Redis未初始化，无法写入缓存 key=rag:ret:dd7e812a95fa65bce1f50b132472f79b
+2026-08-15 02:35:38 | INFO | rag_main | 【RAG链路】执行同步问答，检索文档3条
+2026-08-15 02:47:46 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:49:22 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:49:42 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:49:52 | INFO | rag_main | 【Redis初始化】Redis服务连接成功
+2026-08-15 02:49:52 | INFO | rag_main | 【系统启动】Redis会话存储初始化成功
+2026-08-15 02:51:05 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:51:25 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:51:44 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 02:51:53 | INFO | rag_main | 【Redis初始化】Redis服务连接成功
+2026-08-15 02:51:53 | INFO | rag_main | 【系统启动】Redis会话存储初始化成功
+2026-08-15 02:51:54 | INFO | rag_main | 【系统启动】混合检索BM25索引加载完成
+2026-08-15 02:51:54 | INFO | rag_main | 【Agent构建】初始化单智能体流程图
+2026-08-15 02:51:54 | INFO | rag_main | 【Agent构建】单智能体流程图构建完成
+2026-08-15 02:51:54 | INFO | rag_main | 【多Agent构建】初始化主管-工人多智能体流程图
+2026-08-15 02:51:54 | INFO | rag_main | 【多Agent构建】多智能体流程图构建完成
+2026-08-15 02:53:12 | INFO | rag_main | 【普通对话接口】会话:test_hybrid_01 用户提问:什么是RAG
+2026-08-15 02:53:12 | INFO | rag_main | 【Agent规划节点】开始规划工具调用，用户问题：什么是RAG
+2026-08-15 02:53:19 | INFO | rag_main | 【Agent规划节点】规划完成，待调用工具：search_knowledge_base
+2026-08-15 02:53:19 | INFO | rag_main | 【Agent工具执行节点】执行工具：search_knowledge_base
+2026-08-15 02:53:19 | INFO | rag_main | 【知识库工具】执行检索工具，query=RAG
+2026-08-15 02:53:19 | INFO | rag_main | 【混合检索】开始执行检索，query=RAG
+2026-08-15 02:53:21 | INFO | rag_main | 【混合检索】向量召回3条，BM25召回3条，融合后返回3条
+2026-08-15 02:53:21 | INFO | rag_main | 【检索缓存写入】成功写入检索缓存 key=rag:ret:fb6a72bbc33faf101b251a60eb3ee087 TTL=10s
+2026-08-15 02:53:21 | INFO | rag_main | 【知识库工具】检索成功，返回3条文档
+2026-08-15 02:53:21 | INFO | rag_main | 【Agent工具执行节点】工具search_knowledge_base执行完成
+2026-08-15 02:53:21 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-15 02:53:22 | INFO | rag_main | 【Agent反思】信息充足，直接生成答案
+2026-08-15 02:53:23 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-15 02:53:25 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-15 02:53:25 | INFO | rag_main | 【问答缓存写入】会话test_hybrid_01写入问答缓存 key=rag:chat:test_hybrid_01:dd7e812a95fa65bce1f50b132472f79b TTL=10s
+2026-08-15 02:53:41 | INFO | rag_main | 【普通对话接口】会话:test_hybrid_01 用户提问:什么是RAG
+2026-08-15 02:53:41 | INFO | rag_main | 【Agent规划节点】开始规划工具调用，用户问题：什么是RAG
+2026-08-15 02:53:42 | INFO | rag_main | 【Agent规划节点】规划完成，待调用工具：search_knowledge_base
+2026-08-15 02:53:42 | INFO | rag_main | 【Agent工具执行节点】执行工具：search_knowledge_base
+2026-08-15 02:53:42 | INFO | rag_main | 【知识库工具】执行检索工具，query=什么是RAG
+2026-08-15 02:53:42 | INFO | rag_main | 【混合检索】开始执行检索，query=什么是RAG
+2026-08-15 02:53:42 | INFO | rag_main | 【混合检索】向量召回3条，BM25召回3条，融合后返回3条
+2026-08-15 02:53:42 | INFO | rag_main | 【检索缓存写入】成功写入检索缓存 key=rag:ret:dd7e812a95fa65bce1f50b132472f79b TTL=10s
+2026-08-15 02:53:42 | INFO | rag_main | 【知识库工具】检索成功，返回3条文档
+2026-08-15 02:53:42 | INFO | rag_main | 【Agent工具执行节点】工具search_knowledge_base执行完成
+2026-08-15 02:53:42 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-15 02:53:43 | INFO | rag_main | 【Agent反思】信息充足，直接生成答案
+2026-08-15 02:53:43 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-15 02:53:47 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-15 02:53:47 | INFO | rag_main | 【问答缓存写入】会话test_hybrid_01写入问答缓存 key=rag:chat:test_hybrid_01:dd7e812a95fa65bce1f50b132472f79b TTL=10s
+2026-08-15 02:54:15 | INFO | rag_main | 【普通对话接口】会话:test_hybrid_01 用户提问:rank‑bm25是什么
+2026-08-15 02:54:16 | INFO | rag_main | 【Agent规划节点】开始规划工具调用，用户问题：rank‑bm25是什么
+2026-08-15 02:54:17 | INFO | rag_main | 【Agent规划节点】规划完成，待调用工具：search_knowledge_base
+2026-08-15 02:54:17 | INFO | rag_main | 【Agent工具执行节点】执行工具：search_knowledge_base
+2026-08-15 02:54:17 | INFO | rag_main | 【知识库工具】执行检索工具，query=rank-bm25
+2026-08-15 02:54:17 | INFO | rag_main | 【混合检索】开始执行检索，query=rank-bm25
+2026-08-15 02:54:17 | INFO | rag_main | 【混合检索】向量召回3条，BM25召回3条，融合后返回3条
+2026-08-15 02:54:17 | INFO | rag_main | 【检索缓存写入】成功写入检索缓存 key=rag:ret:db9bb38253a9b965aaa4a27161b1d4af TTL=10s
+2026-08-15 02:54:17 | INFO | rag_main | 【知识库工具】检索成功，返回3条文档
+2026-08-15 02:54:17 | INFO | rag_main | 【Agent工具执行节点】工具search_knowledge_base执行完成
+2026-08-15 02:54:17 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-15 02:54:18 | INFO | rag_main | 【Agent反思】信息不足，需要重新检索
+2026-08-15 02:54:27 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-15 02:54:40 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-15 02:54:40 | INFO | rag_main | 【问答缓存写入】会话test_hybrid_01写入问答缓存 key=rag:chat:test_hybrid_01:d592cb047b510a6aa6dd2bb4b98c242f TTL=10s
+2026-08-15 02:55:05 | INFO | rag_main | 【普通对话接口】会话:test_cache_01 用户提问:LangGraph优点是什么
+2026-08-15 02:55:05 | INFO | rag_main | 【Agent规划节点】开始规划工具调用，用户问题：LangGraph优点是什么
+2026-08-15 02:55:07 | INFO | rag_main | 【Agent规划节点】规划完成，待调用工具：search_knowledge_base
+2026-08-15 02:55:07 | INFO | rag_main | 【Agent工具执行节点】执行工具：search_knowledge_base
+2026-08-15 02:55:07 | INFO | rag_main | 【知识库工具】执行检索工具，query=LangGraph优点
+2026-08-15 02:55:07 | INFO | rag_main | 【混合检索】开始执行检索，query=LangGraph优点
+2026-08-15 02:55:07 | INFO | rag_main | 【混合检索】向量召回3条，BM25召回3条，融合后返回3条
+2026-08-15 02:55:07 | INFO | rag_main | 【检索缓存写入】成功写入检索缓存 key=rag:ret:42ad13edf22199c706a940fe1691fd5b TTL=10s
+2026-08-15 02:55:07 | INFO | rag_main | 【知识库工具】检索成功，返回3条文档
+2026-08-15 02:55:07 | INFO | rag_main | 【Agent工具执行节点】工具search_knowledge_base执行完成
+2026-08-15 02:55:07 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-15 02:55:07 | INFO | rag_main | 【Agent反思】信息不足，需要重新检索
+2026-08-15 02:55:08 | INFO | rag_main | 【Agent规划节点】开始规划工具调用，用户问题：LangGraph优点是什么
+2026-08-15 02:55:09 | INFO | rag_main | 【Agent规划节点】规划完成，待调用工具：search_knowledge_base
+2026-08-15 02:55:09 | INFO | rag_main | 【Agent工具执行节点】执行工具：search_knowledge_base
+2026-08-15 02:55:09 | INFO | rag_main | 【知识库工具】执行检索工具，query=LangGraph优点
+2026-08-15 02:55:09 | INFO | rag_main | 【混合检索】开始执行检索，query=LangGraph优点
+2026-08-15 02:55:09 | INFO | rag_main | 【检索缓存读取】命中检索缓存 key=rag:ret:42ad13edf22199c706a940fe1691fd5b
+2026-08-15 02:55:09 | INFO | rag_main | 【混合检索】命中检索缓存，直接返回3条文档
+2026-08-15 02:55:09 | INFO | rag_main | 【知识库工具】检索成功，返回3条文档
+2026-08-15 02:55:09 | INFO | rag_main | 【Agent工具执行节点】工具search_knowledge_base执行完成
+2026-08-15 02:55:09 | INFO | rag_main | 【Agent反思节点】当前反思次数：1/2
+2026-08-15 02:55:10 | INFO | rag_main | 【Agent反思】信息不足，需要重新检索
+2026-08-15 02:55:10 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-15 02:55:16 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-15 02:55:16 | INFO | rag_main | 【问答缓存写入】会话test_cache_01写入问答缓存 key=rag:chat:test_cache_01:9be79fd6e1b0455aebdef0c3b19ec193 TTL=10s
+2026-08-15 02:55:18 | INFO | rag_main | 【问答缓存读取】会话test_cache_01完全命中问答缓存 key=rag:chat:test_cache_01:9be79fd6e1b0455aebdef0c3b19ec193
+2026-08-15 02:55:18 | INFO | rag_main | 【问答缓存】会话test_cache_01完全命中问答缓存，直接返回
+2026-08-15 02:57:54 | INFO | rag_main | 【Redis关闭】Redis连接正常关闭
+2026-08-15 02:57:54 | INFO | rag_main | 【系统关闭】Redis连接已经关闭

@@ -1,11 +1,10 @@
 from langchain_chroma import Chroma
 from langchain_ollama import OllamaEmbeddings
-from utils.doc_split_utils import DocProcessor
+from rag.loader import document_loader
+from rag.splitter import text_splitter
 import config
-from kb_manager.bm25_retriever import bm25_kb
 from utils.logger import log_info, log_error
 from utils.rag_exceptions import VectorStoreException
-
 
 class ChromaKnowledgeBase:
     def __init__(self):
@@ -23,8 +22,9 @@ class ChromaKnowledgeBase:
 
     # 增量加载单个文件，依据文件source元数据去重
     def add_file_increment(self, file_path: str):
-        raw_docs = self.processor.load_file(file_path)
-        chunk_data = self.processor.split_docs(raw_docs)
+        from rag.vectorstore import bm25_kb
+        raw_docs = document_loader.load(file_path)
+        chunk_data = text_splitter.split_documents(raw_docs)
         texts = [item["text"] for item in chunk_data]
         # 关键1：None兜底为空字典
         metadatas = [item["source"] or {} for item in chunk_data]
@@ -41,14 +41,17 @@ class ChromaKnowledgeBase:
             return
         # 关键2：再次兜底，杜绝None
         safe_metas = [meta or {} for meta in new_metas]
+        # 1、先写入Chroma向量库
         self.vector_store.add_texts(texts=new_texts, metadatas=safe_metas)
-        # 同步增量更新BM25索引
+        # 2、紧接着同步增量更新BM25索引
         bm25_kb.add_texts(new_texts, safe_metas)
+
         print(f"成功新增{len(new_texts)}条文本块至向量库 & BM25索引")
 
     # 全量重建BM25方法
     def rebuild_full_bm25(self):
         """读取Chroma全部数据，完整重建BM25索引（初始化/清空库后调用）"""
+        from rag.vectorstore import bm25_kb
         all_data = self.vector_store.get()
         all_texts = all_data["documents"]
         all_metas = all_data["metadatas"]

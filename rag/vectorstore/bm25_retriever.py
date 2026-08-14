@@ -2,7 +2,8 @@ from rank_bm25 import BM25Okapi
 from typing import List, Tuple
 from langchain_core.documents import Document
 import config
-from utils.doc_split_utils import DocProcessor
+from rag.loader import document_loader
+from rag.splitter import text_splitter
 import jieba
 
 from utils.logger import log_warn, log_error
@@ -11,10 +12,6 @@ from utils.rag_exceptions import BM25IndexException
 
 class BM25Retriever:
     def __init__(self):
-        self.processor = DocProcessor(
-            chunk_size=config.CHUNK_SIZE,
-            chunk_overlap=config.CHUNK_OVERLAP
-        )
         # 存储原始文本、元数据、分词文本
         self.corpus_texts: List[str] = []
         self.corpus_metas: List[dict] = []
