@@ -1,5 +1,5 @@
 # 模型配置
-LLM_MODEL = "qwen2:7b"
+LLM_MODEL = "llama3.1:8b"
 EMBED_MODEL = "nomic-embed-text"
 LLM_TEMP = 0.1
 

@@ -460,3 +460,42 @@ utils.rag_exceptions.BM25IndexException: BM25索引不存在，请先重建索�
 2026-08-15 22:59:10 | INFO | rag_main | 【接口异常】module 'httpx' has no attribute 'TimeoutError'
 2026-08-15 23:04:06 | INFO | rag_main | 【Redis关闭】Redis连接正常关闭
 2026-08-15 23:04:06 | INFO | rag_main | 【系统关闭】Redis连接已经关闭
+2026-08-15 23:18:37 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 23:18:53 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 23:19:01 | INFO | rag_main | 【Redis初始化】Redis服务连接成功
+2026-08-15 23:19:01 | INFO | rag_main | 【系统启动】Redis会话存储初始化成功
+2026-08-15 23:19:02 | INFO | rag_main | 【系统启动】混合检索BM25索引加载完成
+2026-08-15 23:19:02 | INFO | rag_main | 【Agent构建】初始化bind‑tools工具调用流程图
+2026-08-15 23:19:02 | INFO | rag_main | 【Agent构建】bind‑tools流程图构建完成
+2026-08-15 23:19:02 | INFO | rag_main | 【多Agent构建】初始化主管-工人多智能体流程图
+2026-08-15 23:19:02 | INFO | rag_main | 【多Agent构建】多智能体流程图构建完成
+2026-08-15 23:23:29 | INFO | rag_main | 【普通对话接口】会话:test_day18_001 用户提问:125乘以8等于多少
+2026-08-15 23:23:29 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:125乘以8等于多少
+2026-08-15 23:23:40 | ERROR | rag_main | 【同步函数通用异常】同步函数 agent_node 执行未知错误
+Traceback (most recent call last):
+  File "D:\agent-study\Agent_Study_Day1\utils\exception_handler.py", line 48, in sync_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\agent\graph_base.py", line 50, in agent_node
+    resp = llm_with_tools.invoke(state["messages"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6002, in invoke
+    return self.bound.invoke(
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1849, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1656, in generate
+    self._generate_with_cache(
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1994, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1200, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1148, in _chat_stream_with_aggregation
+    raise ValueError(msg)
+ValueError: No data received from Ollama stream.
+2026-08-15 23:23:40 | INFO | rag_main | 【接口异常】No data received from Ollama stream.

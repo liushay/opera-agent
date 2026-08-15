@@ -47,7 +47,7 @@ def global_exception_handler(func):
         try:
             return func(*args, **kwargs)
         # Ollama 网络类错误
-        except (httpx.ConnectError, httpx.TimeoutError, httpx.HTTPStatusError) as e:
+        except (httpx.ConnectError, httpx.TimeoutException, httpx.HTTPStatusError) as e:
             err_msg = f"Ollama服务调用异常，函数：{func.__name__}"
             log_error("Ollama连接异常", err_msg, e)
             raise LLMModelException(err_msg, e) from e

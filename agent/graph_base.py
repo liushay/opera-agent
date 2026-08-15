@@ -47,7 +47,20 @@ llm_with_tools = llm.bind_tools(tool_list)
 @global_exception_handler
 def agent_node(state: AgentState) -> AgentState:
     log_info("Agent‑自主规划节点", f"用户问题:{state['user_query']}")
-    resp = llm_with_tools.invoke(state["messages"])
+    # Ollama要求消息列表非空：若messages为空则用用户查询作为初始消息
+    if not state["messages"]:
+        log_warn("Agent规划节点", "消息列表为空，使用用户查询作为初始消息")
+        messages = [HumanMessage(content=state["user_query"])]
+    else:
+        messages = state["messages"]
+    try:
+        resp = llm_with_tools.invoke(messages)
+    except ValueError as e:
+        if "No data received from Ollama stream" in str(e):
+            log_warn("Agent规划节点", f"Ollama流式返回空数据，重试一次，原始错误：{e}")
+            resp = llm_with_tools.invoke(messages)
+        else:
+            raise
     return {"messages": [resp]}
 
 

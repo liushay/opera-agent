@@ -1,0 +1,507 @@
+2026-08-16 01:06:29 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 01:06:48 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 01:07:00 | INFO | rag_main | 【Redis初始化】Redis服务连接成功
+2026-08-16 01:07:00 | INFO | rag_main | 【系统启动】Redis会话存储初始化成功
+2026-08-16 01:07:01 | INFO | rag_main | 【系统启动】混合检索BM25索引加载完成
+2026-08-16 01:07:01 | INFO | rag_main | 【Agent构建】初始化bind‑tools工具调用流程图
+2026-08-16 01:07:01 | INFO | rag_main | 【Agent构建】bind‑tools流程图构建完成
+2026-08-16 01:07:01 | INFO | rag_main | 【多Agent构建】初始化主管-工人多智能体流程图
+2026-08-16 01:07:01 | INFO | rag_main | 【多Agent构建】多智能体流程图构建完成
+2026-08-16 01:08:45 | INFO | rag_main | 【普通对话接口】会话:test_day18_001 用户提问:125乘以8等于多少
+2026-08-16 01:08:45 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:125乘以8等于多少
+2026-08-16 01:08:54 | ERROR | rag_main | 【同步函数通用异常】同步函数 agent_node 执行未知错误
+Traceback (most recent call last):
+  File "D:\agent-study\Agent_Study_Day1\utils\exception_handler.py", line 48, in sync_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\agent\graph_base.py", line 50, in agent_node
+    resp = llm_with_tools.invoke(state["messages"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6002, in invoke
+    return self.bound.invoke(
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1849, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1656, in generate
+    self._generate_with_cache(
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1994, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1200, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1148, in _chat_stream_with_aggregation
+    raise ValueError(msg)
+ValueError: No data received from Ollama stream.
+2026-08-16 01:08:54 | INFO | rag_main | 【接口异常】No data received from Ollama stream.
+2026-08-16 01:11:05 | INFO | rag_main | 【Redis关闭】Redis连接正常关闭
+2026-08-16 01:11:05 | INFO | rag_main | 【系统关闭】Redis连接已经关闭
+2026-08-16 01:13:07 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 01:13:27 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 01:13:36 | INFO | rag_main | 【Redis初始化】Redis服务连接成功
+2026-08-16 01:13:36 | INFO | rag_main | 【系统启动】Redis会话存储初始化成功
+2026-08-16 01:13:37 | INFO | rag_main | 【系统启动】混合检索BM25索引加载完成
+2026-08-16 01:13:37 | INFO | rag_main | 【Agent构建】初始化bind‑tools工具调用流程图
+2026-08-16 01:13:37 | INFO | rag_main | 【Agent构建】bind‑tools流程图构建完成
+2026-08-16 01:13:37 | INFO | rag_main | 【多Agent构建】初始化主管-工人多智能体流程图
+2026-08-16 01:13:37 | INFO | rag_main | 【多Agent构建】多智能体流程图构建完成
+2026-08-16 01:14:00 | INFO | rag_main | 【普通对话接口】会话:test_day18_001 用户提问:125乘以8等于多少
+2026-08-16 01:14:00 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:125乘以8等于多少
+2026-08-16 01:14:08 | ERROR | rag_main | 【同步函数通用异常】同步函数 agent_node 执行未知错误
+Traceback (most recent call last):
+  File "D:\agent-study\Agent_Study_Day1\utils\exception_handler.py", line 48, in sync_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\agent\graph_base.py", line 50, in agent_node
+    resp = llm_with_tools.invoke(state["messages"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6002, in invoke
+    return self.bound.invoke(
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1849, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1656, in generate
+    self._generate_with_cache(
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1994, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1200, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1148, in _chat_stream_with_aggregation
+    raise ValueError(msg)
+ValueError: No data received from Ollama stream.
+2026-08-16 01:14:08 | INFO | rag_main | 【接口异常】No data received from Ollama stream.
+2026-08-16 01:14:19 | INFO | rag_main | 【普通对话接口】会话:test_day18_001 用户提问:读取 ./demo.txt 文件内容
+2026-08-16 01:14:19 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:读取 ./demo.txt 文件内容
+2026-08-16 01:14:20 | ERROR | rag_main | 【同步函数通用异常】同步函数 agent_node 执行未知错误
+Traceback (most recent call last):
+  File "D:\agent-study\Agent_Study_Day1\utils\exception_handler.py", line 48, in sync_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\agent\graph_base.py", line 50, in agent_node
+    resp = llm_with_tools.invoke(state["messages"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6002, in invoke
+    return self.bound.invoke(
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1849, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1656, in generate
+    self._generate_with_cache(
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1994, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1200, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1148, in _chat_stream_with_aggregation
+    raise ValueError(msg)
+ValueError: No data received from Ollama stream.
+2026-08-16 01:14:20 | INFO | rag_main | 【接口异常】No data received from Ollama stream.
+2026-08-16 01:36:11 | INFO | rag_main | 【Redis关闭】Redis连接正常关闭
+2026-08-16 01:36:11 | INFO | rag_main | 【系统关闭】Redis连接已经关闭
+2026-08-16 01:36:53 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 01:37:15 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 01:37:27 | INFO | rag_main | 【Redis初始化】Redis服务连接成功
+2026-08-16 01:37:27 | INFO | rag_main | 【系统启动】Redis会话存储初始化成功
+2026-08-16 01:37:28 | INFO | rag_main | 【系统启动】混合检索BM25索引加载完成
+2026-08-16 01:37:28 | INFO | rag_main | 【Agent构建】初始化bind‑tools工具调用流程图
+2026-08-16 01:37:28 | INFO | rag_main | 【Agent构建】bind‑tools流程图构建完成
+2026-08-16 01:37:28 | INFO | rag_main | 【多Agent构建】初始化主管-工人多智能体流程图
+2026-08-16 01:37:28 | INFO | rag_main | 【多Agent构建】多智能体流程图构建完成
+2026-08-16 01:38:13 | INFO | rag_main | 【普通对话接口】会话:test_day18_001 用户提问:125乘以8等于多少
+2026-08-16 01:38:13 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:125乘以8等于多少
+2026-08-16 01:38:21 | ERROR | rag_main | 【同步函数通用异常】同步函数 agent_node 执行未知错误
+Traceback (most recent call last):
+  File "D:\agent-study\Agent_Study_Day1\utils\exception_handler.py", line 48, in sync_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\agent\graph_base.py", line 50, in agent_node
+    resp = llm_with_tools.invoke(state["messages"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6002, in invoke
+    return self.bound.invoke(
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1849, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1656, in generate
+    self._generate_with_cache(
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1994, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1200, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1148, in _chat_stream_with_aggregation
+    raise ValueError(msg)
+ValueError: No data received from Ollama stream.
+2026-08-16 01:38:21 | INFO | rag_main | 【接口异常】No data received from Ollama stream.
+2026-08-16 01:38:59 | INFO | rag_main | 【Redis关闭】Redis连接正常关闭
+2026-08-16 01:38:59 | INFO | rag_main | 【系统关闭】Redis连接已经关闭
+2026-08-16 01:39:14 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 01:39:35 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 01:39:45 | INFO | rag_main | 【Redis初始化】Redis服务连接成功
+2026-08-16 01:39:45 | INFO | rag_main | 【系统启动】Redis会话存储初始化成功
+2026-08-16 01:39:47 | INFO | rag_main | 【系统启动】混合检索BM25索引加载完成
+2026-08-16 01:39:47 | INFO | rag_main | 【Agent构建】初始化bind‑tools工具调用流程图
+2026-08-16 01:39:47 | INFO | rag_main | 【Agent构建】bind‑tools流程图构建完成
+2026-08-16 01:39:47 | INFO | rag_main | 【多Agent构建】初始化主管-工人多智能体流程图
+2026-08-16 01:39:47 | INFO | rag_main | 【多Agent构建】多智能体流程图构建完成
+2026-08-16 01:40:21 | INFO | rag_main | 【普通对话接口】会话:test_day18_001 用户提问:125乘以8等于多少
+2026-08-16 01:40:21 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:125乘以8等于多少
+2026-08-16 01:40:30 | ERROR | rag_main | 【同步函数通用异常】同步函数 agent_node 执行未知错误
+Traceback (most recent call last):
+  File "D:\agent-study\Agent_Study_Day1\utils\exception_handler.py", line 48, in sync_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\agent\graph_base.py", line 50, in agent_node
+    resp = llm_with_tools.invoke(state["messages"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6002, in invoke
+    return self.bound.invoke(
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1849, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1656, in generate
+    self._generate_with_cache(
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1994, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1200, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1148, in _chat_stream_with_aggregation
+    raise ValueError(msg)
+ValueError: No data received from Ollama stream.
+2026-08-16 01:40:30 | INFO | rag_main | 【接口异常】No data received from Ollama stream.
+2026-08-16 01:55:34 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 01:56:35 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 01:57:24 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 01:57:30 | INFO | rag_main | 【计算工具】执行计算 3.0 + 5.0
+2026-08-16 01:57:30 | INFO | rag_main | 【计算工具】计算完成，结果=8.0
+2026-08-16 01:58:12 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 01:58:15 | INFO | rag_main | 【Agent构建】初始化bind‑tools工具调用流程图
+2026-08-16 01:58:15 | INFO | rag_main | 【Agent构建】bind‑tools流程图构建完成
+2026-08-16 01:58:16 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:3+5=?
+2026-08-16 01:58:17 | INFO | rag_main | 【计算工具】执行计算 3.0 + 5.0
+2026-08-16 01:58:17 | INFO | rag_main | 【计算工具】计算完成，结果=8.0
+2026-08-16 01:58:17 | INFO | rag_main | 【工具结果同步节点】已将工具返回内容写入tool_result
+2026-08-16 01:58:17 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:3+5=?
+2026-08-16 01:58:18 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-16 01:58:18 | INFO | rag_main | 【Agent反思】信息不足，需要重新检索
+2026-08-16 01:58:19 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-16 01:58:20 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-16 01:58:20 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:帮我读取 test.txt 文件内容
+2026-08-16 01:58:21 | INFO | rag_main | 【工具结果同步节点】已将工具返回内容写入tool_result
+2026-08-16 01:58:21 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:帮我读取 test.txt 文件内容
+2026-08-16 01:58:22 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-16 01:58:27 | INFO | rag_main | 【Agent反思】信息不足，需要重新检索
+2026-08-16 01:58:28 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-16 01:58:30 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-16 01:58:30 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:你好
+2026-08-16 01:58:31 | INFO | rag_main | 【知识库工具】执行检索工具，query=你好
+2026-08-16 01:58:31 | INFO | rag_main | 【混合检索】开始执行检索，query=你好
+2026-08-16 01:58:31 | WARNING | rag_main | 【检索缓存读取】Redis未初始化，禁用缓存读取 key=rag:ret:7eca689f0d3389d9dea66ae112e5cfd7
+2026-08-16 01:58:33 | WARNING | rag_main | 【BM25检索】BM25索引未初始化，直接返回空结果
+2026-08-16 01:58:33 | WARNING | rag_main | 【混合检索】BM25索引异常，仅使用向量检索结果
+Traceback (most recent call last):
+  File "d:\agent-study\Agent_Study_Day1\rag\vectorstore\hybrid_search.py", line 60, in hybrid_retrieve
+    bm25_pairs = bm25_kb.search(query, top_k=config.BM25_TOP_K)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\agent-study\Agent_Study_Day1\rag\vectorstore\bm25_retriever.py", line 52, in search
+    raise BM25IndexException("BM25索引不存在，请先重建索引")
+utils.rag_exceptions.BM25IndexException: BM25索引不存在，请先重建索引
+2026-08-16 01:58:33 | INFO | rag_main | 【混合检索】向量召回3条，BM25召回0条，融合后返回2条
+2026-08-16 01:58:33 | WARNING | rag_main | 【检索缓存写入】Redis未初始化，无法写入缓存 key=rag:ret:7eca689f0d3389d9dea66ae112e5cfd7
+2026-08-16 01:58:33 | INFO | rag_main | 【知识库工具】检索成功，返回2条文档
+2026-08-16 01:58:33 | INFO | rag_main | 【工具结果同步节点】已将工具返回内容写入tool_result
+2026-08-16 01:58:33 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:你好
+2026-08-16 01:58:35 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-16 01:58:37 | INFO | rag_main | 【Agent反思】信息不足，需要重新检索
+2026-08-16 01:58:37 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-16 01:58:41 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-16 02:01:19 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 02:06:36 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 02:06:51 | INFO | rag_main | 【计算工具】执行计算 125.0 * 8.0
+2026-08-16 02:06:51 | INFO | rag_main | 【计算工具】计算完成，结果=1000.0
+2026-08-16 02:29:22 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 02:29:30 | INFO | rag_main | 【Redis初始化】Redis服务连接成功
+2026-08-16 02:29:30 | INFO | rag_main | 【系统启动】Redis会话存储初始化成功
+2026-08-16 02:29:31 | INFO | rag_main | 【系统启动】混合检索BM25索引加载完成
+2026-08-16 02:29:31 | INFO | rag_main | 【Agent构建】初始化bind‑tools工具调用流程图
+2026-08-16 02:29:31 | INFO | rag_main | 【Agent构建】bind‑tools流程图构建完成
+2026-08-16 02:29:31 | INFO | rag_main | 【多Agent构建】初始化主管-工人多智能体流程图
+2026-08-16 02:29:31 | INFO | rag_main | 【多Agent构建】多智能体流程图构建完成
+2026-08-16 02:30:12 | INFO | rag_main | 【普通对话接口】会话:test_verify_101 用户提问:LangGraph有哪些优点
+2026-08-16 02:30:12 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:LangGraph有哪些优点
+2026-08-16 02:30:20 | WARNING | rag_main | 【Agent规划节点】Ollama流式返回空数据，重试一次，原始错误：No data received from Ollama stream.
+2026-08-16 02:30:20 | ERROR | rag_main | 【同步函数通用异常】同步函数 agent_node 执行未知错误
+Traceback (most recent call last):
+  File "d:\agent-study\Agent_Study_Day1\agent\graph_base.py", line 51, in agent_node
+    resp = llm_with_tools.invoke(state["messages"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6002, in invoke
+    return self.bound.invoke(
+           ^^^^^^^^^^^^^^^^^^
+  File "d:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+  File "d:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1849, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1656, in generate
+    self._generate_with_cache(
+  File "d:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1994, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "d:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1200, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1148, in _chat_stream_with_aggregation
+    raise ValueError(msg)
+ValueError: No data received from Ollama stream.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "d:\agent-study\Agent_Study_Day1\utils\exception_handler.py", line 48, in sync_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "d:\agent-study\Agent_Study_Day1\agent\graph_base.py", line 55, in agent_node
+    resp = llm_with_tools.invoke(state["messages"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 6002, in invoke
+    return self.bound.invoke(
+           ^^^^^^^^^^^^^^^^^^
+  File "d:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+  File "d:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1849, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1656, in generate
+    self._generate_with_cache(
+  File "d:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1994, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "d:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1200, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\agent-study\Agent_Study_Day1\.venv\Lib\site-packages\langchain_ollama\chat_models.py", line 1148, in _chat_stream_with_aggregation
+    raise ValueError(msg)
+ValueError: No data received from Ollama stream.
+2026-08-16 02:30:21 | INFO | rag_main | 【接口异常】No data received from Ollama stream.
+2026-08-16 02:35:25 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 02:38:30 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 02:38:42 | INFO | rag_main | 【Redis初始化】Redis服务连接成功
+2026-08-16 02:38:42 | INFO | rag_main | 【系统启动】Redis会话存储初始化成功
+2026-08-16 02:38:43 | INFO | rag_main | 【系统启动】混合检索BM25索引加载完成
+2026-08-16 02:38:43 | INFO | rag_main | 【Agent构建】初始化bind‑tools工具调用流程图
+2026-08-16 02:38:43 | INFO | rag_main | 【Agent构建】bind‑tools流程图构建完成
+2026-08-16 02:38:43 | INFO | rag_main | 【多Agent构建】初始化主管-工人多智能体流程图
+2026-08-16 02:38:43 | INFO | rag_main | 【多Agent构建】多智能体流程图构建完成
+2026-08-16 02:39:23 | INFO | rag_main | 【普通对话接口】会话:verify_normal_001 用户提问:LangGraph有哪些优点
+2026-08-16 02:39:23 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:LangGraph有哪些优点
+2026-08-16 02:39:23 | WARNING | rag_main | 【Agent规划节点】消息列表为空，使用用户查询作为初始消息
+2026-08-16 02:39:25 | INFO | rag_main | 【知识库工具】执行检索工具，query=LangGraph的优点
+2026-08-16 02:39:25 | INFO | rag_main | 【混合检索】开始执行检索，query=LangGraph的优点
+2026-08-16 02:39:26 | INFO | rag_main | 【混合检索】向量召回3条，BM25召回3条，融合后返回3条
+2026-08-16 02:39:26 | INFO | rag_main | 【检索缓存写入】成功写入检索缓存 key=rag:ret:3f0721ff95a5fee2c0ec7c23dee36afc TTL=10s
+2026-08-16 02:39:26 | INFO | rag_main | 【知识库工具】检索成功，返回3条文档
+2026-08-16 02:39:26 | INFO | rag_main | 【工具结果同步节点】已将工具返回内容写入tool_result
+2026-08-16 02:39:26 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:LangGraph有哪些优点
+2026-08-16 02:39:30 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-16 02:39:31 | INFO | rag_main | 【Agent反思】信息不足，需要重新检索
+2026-08-16 02:39:32 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-16 02:39:37 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-16 02:39:37 | INFO | rag_main | 【问答缓存写入】会话verify_normal_001写入问答缓存 key=rag:chat:verify_normal_001:2590f531340dc51af47457aea55c22a4 TTL=10s
+2026-08-16 02:39:37 | INFO | rag_main | 【普通对话接口】会话:verify_tool_001 用户提问:125乘以8等于多少
+2026-08-16 02:39:37 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:125乘以8等于多少
+2026-08-16 02:39:37 | WARNING | rag_main | 【Agent规划节点】消息列表为空，使用用户查询作为初始消息
+2026-08-16 02:39:38 | INFO | rag_main | 【计算工具】执行计算 125.0 * 8.0
+2026-08-16 02:39:38 | INFO | rag_main | 【计算工具】计算完成，结果=1000.0
+2026-08-16 02:39:38 | INFO | rag_main | 【工具结果同步节点】已将工具返回内容写入tool_result
+2026-08-16 02:39:38 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:125乘以8等于多少
+2026-08-16 02:39:39 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-16 02:39:40 | INFO | rag_main | 【Agent反思】信息不足，需要重新检索
+2026-08-16 02:39:40 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-16 02:39:41 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-16 02:39:41 | INFO | rag_main | 【问答缓存写入】会话verify_tool_001写入问答缓存 key=rag:chat:verify_tool_001:cc25ecfacbe3cfd74bc3c994ebec2668 TTL=10s
+2026-08-16 02:39:41 | INFO | rag_main | 【普通对话接口】会话:verify_tool_002 用户提问:读取 test.txt 文件内容
+2026-08-16 02:39:41 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:读取 test.txt 文件内容
+2026-08-16 02:39:41 | WARNING | rag_main | 【Agent规划节点】消息列表为空，使用用户查询作为初始消息
+2026-08-16 02:39:42 | INFO | rag_main | 【工具结果同步节点】已将工具返回内容写入tool_result
+2026-08-16 02:39:42 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:读取 test.txt 文件内容
+2026-08-16 02:39:44 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-16 02:39:47 | INFO | rag_main | 【Agent反思】信息不足，需要重新检索
+2026-08-16 02:39:48 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-16 02:39:50 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-16 02:39:50 | INFO | rag_main | 【问答缓存写入】会话verify_tool_002写入问答缓存 key=rag:chat:verify_tool_002:550fcf3573bf1dc7471f754705436267 TTL=10s
+2026-08-16 02:39:50 | INFO | rag_main | 【普通对话接口】会话:verify_mem_001 用户提问:我的名字叫小明
+2026-08-16 02:39:50 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:我的名字叫小明
+2026-08-16 02:39:50 | WARNING | rag_main | 【Agent规划节点】消息列表为空，使用用户查询作为初始消息
+2026-08-16 02:39:52 | INFO | rag_main | 【知识库工具】执行检索工具，query=小明为学李
+2026-08-16 02:39:52 | INFO | rag_main | 【混合检索】开始执行检索，query=小明为学李
+2026-08-16 02:39:52 | INFO | rag_main | 【混合检索】向量召回3条，BM25召回3条，融合后返回3条
+2026-08-16 02:39:52 | INFO | rag_main | 【检索缓存写入】成功写入检索缓存 key=rag:ret:5b7e959bcae4925ce0b0b1208c13e80f TTL=10s
+2026-08-16 02:39:52 | INFO | rag_main | 【知识库工具】检索成功，返回3条文档
+2026-08-16 02:39:52 | INFO | rag_main | 【工具结果同步节点】已将工具返回内容写入tool_result
+2026-08-16 02:39:52 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:我的名字叫小明
+2026-08-16 02:40:00 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-16 02:40:01 | INFO | rag_main | 【Agent反思】信息不足，需要重新检索
+2026-08-16 02:40:02 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-16 02:40:07 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-16 02:40:07 | INFO | rag_main | 【问答缓存写入】会话verify_mem_001写入问答缓存 key=rag:chat:verify_mem_001:1a69fa18de09b98b4e5ef53b586e724f TTL=10s
+2026-08-16 02:40:07 | INFO | rag_main | 【普通对话接口】会话:verify_mem_001 用户提问:我叫什么名字
+2026-08-16 02:40:07 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:我叫什么名字
+2026-08-16 02:40:07 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-16 02:40:08 | INFO | rag_main | 【Agent反思】信息不足，需要重新检索
+2026-08-16 02:40:09 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-16 02:40:10 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-16 02:40:11 | INFO | rag_main | 【问答缓存写入】会话verify_mem_001写入问答缓存 key=rag:chat:verify_mem_001:1d5c15899c9d612928babb466a91991a TTL=10s
+2026-08-16 02:40:11 | INFO | rag_main | 【普通对话接口】会话:verify_cache_001 用户提问:什么是RAG
+2026-08-16 02:40:11 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:什么是RAG
+2026-08-16 02:40:11 | WARNING | rag_main | 【Agent规划节点】消息列表为空，使用用户查询作为初始消息
+2026-08-16 02:40:12 | INFO | rag_main | 【知识库工具】执行检索工具，query=RAG
+2026-08-16 02:40:12 | INFO | rag_main | 【混合检索】开始执行检索，query=RAG
+2026-08-16 02:40:12 | INFO | rag_main | 【混合检索】向量召回3条，BM25召回3条，融合后返回3条
+2026-08-16 02:40:12 | INFO | rag_main | 【检索缓存写入】成功写入检索缓存 key=rag:ret:fb6a72bbc33faf101b251a60eb3ee087 TTL=10s
+2026-08-16 02:40:12 | INFO | rag_main | 【知识库工具】检索成功，返回3条文档
+2026-08-16 02:40:12 | INFO | rag_main | 【工具结果同步节点】已将工具返回内容写入tool_result
+2026-08-16 02:40:12 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:什么是RAG
+2026-08-16 02:40:17 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-16 02:40:18 | INFO | rag_main | 【Agent反思】信息不足，需要重新检索
+2026-08-16 02:40:19 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-16 02:40:23 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-16 02:40:23 | INFO | rag_main | 【问答缓存写入】会话verify_cache_001写入问答缓存 key=rag:chat:verify_cache_001:dd7e812a95fa65bce1f50b132472f79b TTL=10s
+2026-08-16 02:40:23 | INFO | rag_main | 【问答缓存读取】会话verify_cache_001完全命中问答缓存 key=rag:chat:verify_cache_001:dd7e812a95fa65bce1f50b132472f79b
+2026-08-16 02:40:23 | INFO | rag_main | 【问答缓存】会话verify_cache_001完全命中问答缓存，直接返回
+2026-08-16 02:40:23 | INFO | rag_main | 【缓存全局清理】成功清空RAG缓存，共删除1条key
+2026-08-16 02:40:23 | INFO | rag_main | 【普通对话接口】会话:verify_hybrid_001 用户提问:LangGraph 状态图 节点 边
+2026-08-16 02:40:23 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:LangGraph 状态图 节点 边
+2026-08-16 02:40:23 | WARNING | rag_main | 【Agent规划节点】消息列表为空，使用用户查询作为初始消息
+2026-08-16 02:40:25 | INFO | rag_main | 【知识库工具】执行检索工具，query=LangGraph 状态图 节点 边
+2026-08-16 02:40:25 | INFO | rag_main | 【混合检索】开始执行检索，query=LangGraph 状态图 节点 边
+2026-08-16 02:40:25 | INFO | rag_main | 【混合检索】向量召回3条，BM25召回3条，融合后返回3条
+2026-08-16 02:40:25 | INFO | rag_main | 【检索缓存写入】成功写入检索缓存 key=rag:ret:1492fb98f76fa9cd67a70c99380fd124 TTL=10s
+2026-08-16 02:40:25 | INFO | rag_main | 【知识库工具】检索成功，返回3条文档
+2026-08-16 02:40:25 | INFO | rag_main | 【工具结果同步节点】已将工具返回内容写入tool_result
+2026-08-16 02:40:25 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:LangGraph 状态图 节点 边
+2026-08-16 02:40:29 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-16 02:40:38 | INFO | rag_main | 【Agent反思】信息不足，需要重新检索
+2026-08-16 02:40:39 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-16 02:40:46 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-16 02:40:46 | INFO | rag_main | 【问答缓存写入】会话verify_hybrid_001写入问答缓存 key=rag:chat:verify_hybrid_001:1492fb98f76fa9cd67a70c99380fd124 TTL=10s
+2026-08-16 02:40:46 | INFO | rag_main | 【普通对话接口】会话:verify_exc_001 用户提问:读取 ./not_exist_file_xyz.txt 内容
+2026-08-16 02:40:46 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:读取 ./not_exist_file_xyz.txt 内容
+2026-08-16 02:40:46 | WARNING | rag_main | 【Agent规划节点】消息列表为空，使用用户查询作为初始消息
+2026-08-16 02:40:47 | INFO | rag_main | 【工具结果同步节点】已将工具返回内容写入tool_result
+2026-08-16 02:40:47 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:读取 ./not_exist_file_xyz.txt 内容
+2026-08-16 02:40:48 | INFO | rag_main | 【工具结果同步节点】已将工具返回内容写入tool_result
+2026-08-16 02:40:48 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:读取 ./not_exist_file_xyz.txt 内容
+2026-08-16 02:40:50 | INFO | rag_main | 【工具结果同步节点】已将工具返回内容写入tool_result
+2026-08-16 02:40:50 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:读取 ./not_exist_file_xyz.txt 内容
+2026-08-16 02:40:51 | INFO | rag_main | 【工具结果同步节点】已将工具返回内容写入tool_result
+2026-08-16 02:40:51 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:读取 ./not_exist_file_xyz.txt 内容
+2026-08-16 02:40:52 | INFO | rag_main | 【工具结果同步节点】已将工具返回内容写入tool_result
+2026-08-16 02:40:52 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:读取 ./not_exist_file_xyz.txt 内容
+2026-08-16 02:40:53 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-16 02:40:54 | INFO | rag_main | 【Agent反思】信息不足，需要重新检索
+2026-08-16 02:40:55 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-16 02:40:59 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-16 02:40:59 | INFO | rag_main | 【问答缓存写入】会话verify_exc_001写入问答缓存 key=rag:chat:verify_exc_001:5105bc254e1d483a66856be539d9bec9 TTL=10s
+2026-08-16 02:40:59 | INFO | rag_main | 【普通对话接口】会话:verify_exc_002 用户提问:量子引力统一理论的最新实验进展和暗物质本质的最终答案
+2026-08-16 02:40:59 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:量子引力统一理论的最新实验进展和暗物质本质的最终答案
+2026-08-16 02:40:59 | WARNING | rag_main | 【Agent规划节点】消息列表为空，使用用户查询作为初始消息
+2026-08-16 02:41:01 | INFO | rag_main | 【知识库工具】执行检索工具，query=量子引力统一理论的最新实验进展和暗物质本质的最终答案
+2026-08-16 02:41:01 | INFO | rag_main | 【混合检索】开始执行检索，query=量子引力统一理论的最新实验进展和暗物质本质的最终答案
+2026-08-16 02:41:01 | INFO | rag_main | 【混合检索】向量召回3条，BM25召回3条，融合后返回3条
+2026-08-16 02:41:01 | INFO | rag_main | 【检索缓存写入】成功写入检索缓存 key=rag:ret:ad0c9ae46d68261360db5354d51a7668 TTL=10s
+2026-08-16 02:41:01 | INFO | rag_main | 【知识库工具】检索成功，返回3条文档
+2026-08-16 02:41:01 | INFO | rag_main | 【工具结果同步节点】已将工具返回内容写入tool_result
+2026-08-16 02:41:01 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:量子引力统一理论的最新实验进展和暗物质本质的最终答案
+2026-08-16 02:41:08 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-16 02:41:09 | INFO | rag_main | 【Agent反思】信息不足，需要重新检索
+2026-08-16 02:41:11 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-16 02:41:26 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-16 02:41:26 | INFO | rag_main | 【问答缓存写入】会话verify_exc_002写入问答缓存 key=rag:chat:verify_exc_002:ad0c9ae46d68261360db5354d51a7668 TTL=10s
+2026-08-16 02:46:28 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 02:48:36 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 02:48:55 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 02:49:04 | INFO | rag_main | 【Redis初始化】Redis服务连接成功
+2026-08-16 02:49:04 | INFO | rag_main | 【系统启动】Redis会话存储初始化成功
+2026-08-16 02:49:06 | INFO | rag_main | 【系统启动】混合检索BM25索引加载完成
+2026-08-16 02:49:06 | INFO | rag_main | 【Agent构建】初始化bind‑tools工具调用流程图
+2026-08-16 02:49:06 | INFO | rag_main | 【Agent构建】bind‑tools流程图构建完成
+2026-08-16 02:49:06 | INFO | rag_main | 【多Agent构建】初始化主管-工人多智能体流程图
+2026-08-16 02:49:06 | INFO | rag_main | 【多Agent构建】多智能体流程图构建完成
+2026-08-16 02:53:39 | INFO | rag_main | 【普通对话接口】会话:test001 用户提问:向量数据库的作用是什么
+2026-08-16 02:53:39 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:向量数据库的作用是什么
+2026-08-16 02:53:49 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-16 02:53:50 | INFO | rag_main | 【Agent反思】信息不足，需要重新检索
+2026-08-16 02:53:51 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-16 02:54:02 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-16 02:54:02 | INFO | rag_main | 【问答缓存写入】会话test001写入问答缓存 key=rag:chat:test001:9eed3da2e485356f0819f11b9e97e3d1 TTL=10s
+2026-08-16 02:54:31 | INFO | rag_main | 【普通对话接口】会话:test001 用户提问:向量数据库的作用是什么
+2026-08-16 02:54:31 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:向量数据库的作用是什么
+2026-08-16 02:54:32 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-16 02:54:33 | INFO | rag_main | 【Agent反思】信息不足，需要重新检索
+2026-08-16 02:54:34 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-16 02:54:44 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-16 02:54:44 | INFO | rag_main | 【问答缓存写入】会话test001写入问答缓存 key=rag:chat:test001:9eed3da2e485356f0819f11b9e97e3d1 TTL=10s
+2026-08-16 02:54:47 | INFO | rag_main | 【问答缓存读取】会话test001完全命中问答缓存 key=rag:chat:test001:9eed3da2e485356f0819f11b9e97e3d1
+2026-08-16 02:54:47 | INFO | rag_main | 【问答缓存】会话test001完全命中问答缓存，直接返回
+2026-08-16 02:56:55 | INFO | rag_main | 【多智能体接口】会话:multi_01 问题:介绍一下LangGraph
+2026-08-16 02:56:55 | INFO | rag_main | 【多Agent主管节点】开始拆分任务，用户问题：介绍一下LangGraph
+2026-08-16 02:56:59 | WARNING | rag_main | 【多Agent主管】模型输出JSON解析失败，无任务生成
+Traceback (most recent call last):
+  File "D:\agent-study\Agent_Study_Day1\agent\multi_agent.py", line 67, in supervisor_node
+    task_data = json.loads(res.content.strip())
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jiujiu\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jiujiu\AppData\Local\Programs\Python\Python311\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jiujiu\AppData\Local\Programs\Python\Python311\Lib\json\decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2026-08-16 02:56:59 | INFO | rag_main | 【多Agent主管节点】任务拆分完成 []，当前重试次数:0
+2026-08-16 02:56:59 | INFO | rag_main | 【多Agent汇总节点】开始整合所有工人结果生成回答
+2026-08-16 02:57:05 | INFO | rag_main | 【多Agent汇总节点】最终回答生成完成
+2026-08-16 02:57:05 | INFO | rag_main | 【问答缓存写入】会话multi_01写入问答缓存 key=rag:chat:multi_01:103df8444f22565ff24be1f9699a383e TTL=10s
+2026-08-16 02:59:33 | INFO | rag_main | 【Redis关闭】Redis连接正常关闭
+2026-08-16 02:59:33 | INFO | rag_main | 【系统关闭】Redis连接已经关闭
+2026-08-16 03:00:46 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 03:01:10 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-16 03:01:21 | INFO | rag_main | 【Redis初始化】Redis服务连接成功
+2026-08-16 03:01:21 | INFO | rag_main | 【系统启动】Redis会话存储初始化成功
+2026-08-16 03:01:23 | INFO | rag_main | 【系统启动】混合检索BM25索引加载完成
+2026-08-16 03:01:23 | INFO | rag_main | 【Agent构建】初始化bind‑tools工具调用流程图
+2026-08-16 03:01:23 | INFO | rag_main | 【Agent构建】bind‑tools流程图构建完成
+2026-08-16 03:01:23 | INFO | rag_main | 【多Agent构建】初始化主管-工人多智能体流程图
+2026-08-16 03:01:23 | INFO | rag_main | 【多Agent构建】多智能体流程图构建完成
+2026-08-16 03:01:35 | INFO | rag_main | 【普通对话接口】会话:test001 用户提问:向量数据库的作用是什么
+2026-08-16 03:01:35 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:向量数据库的作用是什么
+2026-08-16 03:01:38 | INFO | rag_main | 【Agent反思节点】当前反思次数：0/2
+2026-08-16 03:01:39 | INFO | rag_main | 【Agent反思】信息不足，需要重新检索
+2026-08-16 03:01:40 | INFO | rag_main | 【Agent生成回答节点】开始整合信息生成最终回复
+2026-08-16 03:01:50 | INFO | rag_main | 【Agent生成回答节点】AI回复生成完成
+2026-08-16 03:01:50 | INFO | rag_main | 【问答缓存写入】会话test001写入问答缓存 key=rag:chat:test001:9eed3da2e485356f0819f11b9e97e3d1 TTL=10s
+2026-08-16 03:04:50 | INFO | rag_main | 【Redis关闭】Redis连接正常关闭
+2026-08-16 03:04:50 | INFO | rag_main | 【系统关闭】Redis连接已经关闭
