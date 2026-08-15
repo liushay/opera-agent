@@ -5,6 +5,7 @@ from rag.vectorstore import kb, bm25_kb, hybrid_retrieve
 import config
 from utils.logger import log_info, log_warn, log_error
 from utils.rag_exceptions import VectorStoreException, BM25IndexException
+from langchain_core.tools import tool
 
 embedding = OllamaEmbeddings(model=config.EMBED_MODEL)
 vector_store = Chroma(
@@ -14,6 +15,7 @@ vector_store = Chroma(
 retriever = vector_store.as_retriever(search_kwargs={"k": config.RETRIEVE_TOP_K})
 
 # 工具1：知识库检索工具
+@tool
 def search_knowledge_base(query: str) -> str:
     """从本地知识库检索和问题相关的文档内容
     query: 用户待检索的查询文本
@@ -35,6 +37,7 @@ def search_knowledge_base(query: str) -> str:
     return res_text
 
 # 工具2：数学计算器工具
+@tool
 def calculator(a: float, b: float, op: str) -> str:
     """执行两个数字的四则运算
     a: 第一个运算数字
@@ -59,6 +62,4 @@ def calculator(a: float, b: float, op: str) -> str:
     log_info("计算工具", f"计算完成，结果={result}")
     return f"计算结果：{a} {op} {b} = {result}"
 
-knowledge_tool = StructuredTool.from_function(search_knowledge_base)
-calc_tool = StructuredTool.from_function(calculator)
-tool_list = [knowledge_tool, calc_tool]
+tool_list = [search_knowledge_base, calculator]

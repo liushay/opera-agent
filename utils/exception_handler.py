@@ -2,6 +2,8 @@ import functools
 import asyncio
 import httpx
 import redis
+from httpcore import TimeoutException
+
 from utils.logger import log_error, log_warn
 from utils.rag_exceptions import LLMModelException, RedisStorageException
 
@@ -22,7 +24,7 @@ def global_exception_handler(func):
                 log_error("异步函数超时", err_msg, e)
                 raise Exception("大模型执行超时，请简化你的问题") from e
             # Ollama 网络类错误
-            except (httpx.ConnectError, httpx.TimeoutError, httpx.HTTPStatusError) as e:
+            except (httpx.ConnectError, TimeoutException, httpx.HTTPStatusError) as e:
                 err_msg = f"Ollama服务调用异常，函数：{func.__name__}"
                 log_error("Ollama连接异常", err_msg, e)
                 raise LLMModelException(err_msg, e) from e

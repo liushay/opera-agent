@@ -2,11 +2,15 @@ from typing import TypedDict, Annotated, Sequence, Literal
 import operator
 import json
 import httpx
+
 from langchain_core.messages import BaseMessage, HumanMessage, AIMessage
 from langgraph.graph import StateGraph, END
+from langgraph.prebuilt import ToolNode
 from langchain_ollama import ChatOllama
+
 import config
-from tools.custom_tools import tool_list, knowledge_tool, calc_tool
+from tools.custom_tools import calculator, search_knowledge_base
+from tools.tool_file_query import read_local_file
 from utils.logger import log_debug, log_info, log_warn, log_error
 from utils.rag_exceptions import LLMModelException, AgentFlowException, VectorStoreException, BM25IndexException
 from utils.exception_handler import global_exception_handler
@@ -18,7 +22,9 @@ class AgentState(TypedDict):
     tool_result: str
     reflect_times: int
 
-# 初始化LLM
+# ----------------------工具&LLM初始化----------------------
+tool_list = [calculator, search_knowledge_base, read_local_file]
+
 def get_llm():
     try:
         return ChatOllama(
@@ -35,71 +41,26 @@ def get_llm():
         raise LLMModelException(err_msg, e)
 
 llm = get_llm()
-tools_info = "\n".join([f"工具名称：{t.name}，功能：{t.description}" for t in tool_list])
+llm_with_tools = llm.bind_tools(tool_list)
 
-# 节点1：工具规划
+# ----------------------新增节点----------------------
 @global_exception_handler
-def plan_tool_call(state: AgentState) -> AgentState:
-    log_info("Agent规划节点", f"开始规划工具调用，用户问题：{state['user_query']}")
-    prompt = f"""
-可用工具列表：
-{tools_info}
-规则：
-1. RAG/分块/向量库技术问题：调用search_knowledge_base
-2. 数字四则运算：调用calculator
-3. 日常闲聊、无计算无查询：{{"tool_name":"none"}}
-输出要求：仅输出纯JSON，无任何多余文字
-格式示例：{{"tool_name":"search_knowledge_base","params":{{"query":"xxx"}}}}
-用户问题：{state['user_query']}
-"""
-    try:
-        resp = llm.invoke([HumanMessage(content=prompt)])
-    except httpx.ConnectError as e:
-        err_msg = "规划节点调用Ollama连接失败"
-        log_error("Agent规划LLM异常", err_msg, e)
-        raise LLMModelException(err_msg, e)
-    except httpx.TimeoutException as e:
-        err_msg = "规划节点Ollama调用超时"
-        log_error("Agent规划LLM超时", err_msg, e)
-        raise LLMModelException(err_msg, e)
-    except Exception as e:
-        err_msg = "规划节点模型生成失败"
-        log_error("Agent规划流程异常", err_msg, e)
-        raise AgentFlowException(err_msg, e)
+def agent_node(state: AgentState) -> AgentState:
+    log_info("Agent‑自主规划节点", f"用户问题:{state['user_query']}")
+    resp = llm_with_tools.invoke(state["messages"])
+    return {"messages": [resp]}
 
-    try:
-        call_data = json.loads(resp.content.strip())
-    except json.JSONDecodeError as e:
-        log_warn("Agent规划", "模型输出非标准JSON，工具调用设为none", e)
-        call_data = {"tool_name": "none", "params": {}}
-    log_info("Agent规划节点", f"规划完成，待调用工具：{call_data['tool_name']}")
-    return {"tool_call": call_data}
 
-# 节点2：执行工具
 @global_exception_handler
-def run_tool(state: AgentState) -> AgentState:
-    call_info = state["tool_call"]
-    tool_name = call_info["tool_name"]
-    params = call_info["params"]
-    res = "无需调用任何工具"
-    log_info("Agent工具执行节点", f"执行工具：{tool_name}")
-    try:
-        if tool_name == "search_knowledge_base":
-            res = knowledge_tool.invoke(params)
-        elif tool_name == "calculator":
-            res = calc_tool.invoke(params)
-    except (VectorStoreException, BM25IndexException) as e:
-        err_msg = f"工具{tool_name}底层检索失败"
-        log_error("Agent工具执行异常", err_msg, e)
-        raise AgentFlowException(err_msg, e)
-    except Exception as e:
-        err_msg = f"工具{tool_name}执行未知错误"
-        log_error("Agent工具执行异常", err_msg, e)
-        raise AgentFlowException(err_msg, e)
-    log_info("Agent工具执行节点", f"工具{tool_name}执行完成")
-    return {"tool_result": res}
+def sync_tool_result(state: AgentState) -> AgentState:
+    """中转节点：把ToolNode返回的ToolMessage内容同步存入tool_result，兼容原有反思逻辑"""
+    last_msg = state["messages"][-1]
+    tool_content = getattr(last_msg, "content", "")
+    log_info("工具结果同步节点", "已将工具返回内容写入tool_result")
+    return {"tool_result": tool_content}
 
-# 节点3：反思校验
+
+# ----------------------原有节点【完全不动，原样保留】----------------------
 @global_exception_handler
 def reflect_check(state: AgentState) -> AgentState:
     q = state["user_query"]
@@ -136,7 +97,7 @@ False = 信息缺失，需要重新检索知识库补充内容
     log_info("Agent反思", "信息充足，直接生成答案")
     return {"reflect_times": reflect_cnt}
 
-# 节点4：生成最终回答
+
 @global_exception_handler
 def generate_final_ans(state: AgentState) -> AgentState:
     history = state["messages"]
@@ -162,18 +123,22 @@ def generate_final_ans(state: AgentState) -> AgentState:
     log_info("Agent生成回答节点", "AI回复生成完成")
     return {"messages": [AIMessage(content=ans.content)]}
 
-# 路由
-def route_by_tool(state: AgentState) -> Literal["run_tool", "generate_final_ans"]:
-    if state["tool_call"]["tool_name"] == "none":
-        return "generate_final_ans"
-    return "run_tool"
 
-def route_reflect(state: AgentState) -> Literal["plan_tool_call", "generate_final_ans"]:
+# ----------------------路由函数----------------------
+def route_agent_output(state: AgentState) -> Literal["tools", "reflect_check"]:
+    last_msg = state["messages"][-1]
+    if hasattr(last_msg, "tool_calls") and len(last_msg.tool_calls) > 0:
+        return "tools"
+    return "reflect_check"
+
+
+def route_reflect(state: AgentState) -> Literal["agent_node", "generate_final_ans"]:
     q = state["user_query"]
     tool_res = state["tool_result"]
     reflect_cnt = state["reflect_times"]
     max_reflect = config.MAX_REFLECT_TIMES
     if reflect_cnt >= max_reflect:
+        log_info("反思路由", "达到最大重试次数，直接生成答案")
         return "generate_final_ans"
     prompt = f"问题：{q}，现有资料：{tool_res}，信息是否充足？只输出True/False"
     try:
@@ -182,35 +147,51 @@ def route_reflect(state: AgentState) -> Literal["plan_tool_call", "generate_fina
         log_warn("Agent反思路由", "反思判断LLM调用失败，直接生成答案")
         return "generate_final_ans"
     if res == "False":
-        return "plan_tool_call"
+        log_info("反思路由", "信息不足，回流agent重新检索")
+        return "agent_node"
     else:
         return "generate_final_ans"
 
+
+# ----------------------构建流程图----------------------
 def build_agent_graph():
-    log_info("Agent构建", "初始化单智能体流程图")
+    log_info("Agent构建", "初始化bind‑tools工具调用流程图")
+    tool_node = ToolNode(tool_list)
     graph = StateGraph(AgentState)
-    graph.add_node("plan_tool_call", plan_tool_call)
-    graph.add_node("run_tool", run_tool)
+
+    # 注册全部节点
+    graph.add_node("agent_node", agent_node)
+    graph.add_node("tools", tool_node)
+    graph.add_node("sync_tool_result", sync_tool_result)
     graph.add_node("reflect_check", reflect_check)
     graph.add_node("generate_final_ans", generate_final_ans)
-    graph.set_entry_point("plan_tool_call")
+
+    graph.set_entry_point("agent_node")
+
+    # agent分支路由
     graph.add_conditional_edges(
-        source="plan_tool_call",
-        path=route_by_tool,
+        source="agent_node",
+        path=route_agent_output,
         path_map={
-            "run_tool": "run_tool",
-            "generate_final_ans": "generate_final_ans"
+            "tools": "tools",
+            "reflect_check": "reflect_check"
         }
     )
-    graph.add_edge("run_tool", "reflect_check")
+
+    # tools执行完 → 同步结果 → 返回agent_node
+    graph.add_edge("tools", "sync_tool_result")
+    graph.add_edge("sync_tool_result", "agent_node")
+
+    # 反思路由（已改名为route_reflect）
     graph.add_conditional_edges(
         source="reflect_check",
         path=route_reflect,
         path_map={
-            "plan_tool_call": "plan_tool_call",
+            "agent_node": "agent_node",
             "generate_final_ans": "generate_final_ans"
         }
     )
+
     graph.add_edge("generate_final_ans", END)
-    log_info("Agent构建", "单智能体流程图构建完成")
+    log_info("Agent构建", "bind‑tools流程图构建完成")
     return graph.compile()

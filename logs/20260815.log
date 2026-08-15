@@ -431,3 +431,32 @@ utils.rag_exceptions.BM25IndexException: BM25索引不存在，请先重建索�
 2026-08-15 02:55:18 | INFO | rag_main | 【问答缓存】会话test_cache_01完全命中问答缓存，直接返回
 2026-08-15 02:57:54 | INFO | rag_main | 【Redis关闭】Redis连接正常关闭
 2026-08-15 02:57:54 | INFO | rag_main | 【系统关闭】Redis连接已经关闭
+2026-08-15 22:42:03 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 22:46:28 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 22:46:49 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 22:47:01 | INFO | rag_main | 【Redis初始化】Redis服务连接成功
+2026-08-15 22:47:01 | INFO | rag_main | 【系统启动】Redis会话存储初始化成功
+2026-08-15 22:47:02 | INFO | rag_main | 【系统启动】混合检索BM25索引加载完成
+2026-08-15 22:47:02 | INFO | rag_main | 【Agent构建】初始化bind‑tools工具调用流程图
+2026-08-15 22:47:02 | INFO | rag_main | 【Agent构建】bind‑tools流程图构建完成
+2026-08-15 22:47:02 | INFO | rag_main | 【多Agent构建】初始化主管-工人多智能体流程图
+2026-08-15 22:47:02 | INFO | rag_main | 【多Agent构建】多智能体流程图构建完成
+2026-08-15 22:50:11 | INFO | rag_main | 【普通对话接口】会话:test_day18_001 用户提问:这里填写测试问题
+2026-08-15 22:50:11 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:这里填写测试问题
+2026-08-15 22:50:19 | INFO | rag_main | 【接口异常】module 'httpx' has no attribute 'TimeoutError'
+2026-08-15 22:55:00 | INFO | rag_main | 【Redis关闭】Redis连接正常关闭
+2026-08-15 22:55:00 | INFO | rag_main | 【系统关闭】Redis连接已经关闭
+2026-08-15 22:58:20 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 22:58:36 | INFO | rag_main | 【向量库初始化】Chroma向量库加载完成
+2026-08-15 22:58:44 | INFO | rag_main | 【Redis初始化】Redis服务连接成功
+2026-08-15 22:58:44 | INFO | rag_main | 【系统启动】Redis会话存储初始化成功
+2026-08-15 22:58:45 | INFO | rag_main | 【系统启动】混合检索BM25索引加载完成
+2026-08-15 22:58:45 | INFO | rag_main | 【Agent构建】初始化bind‑tools工具调用流程图
+2026-08-15 22:58:45 | INFO | rag_main | 【Agent构建】bind‑tools流程图构建完成
+2026-08-15 22:58:45 | INFO | rag_main | 【多Agent构建】初始化主管-工人多智能体流程图
+2026-08-15 22:58:45 | INFO | rag_main | 【多Agent构建】多智能体流程图构建完成
+2026-08-15 22:59:04 | INFO | rag_main | 【普通对话接口】会话:test_day18_001 用户提问:向量数据库的作用是什么
+2026-08-15 22:59:04 | INFO | rag_main | 【Agent‑自主规划节点】用户问题:向量数据库的作用是什么
+2026-08-15 22:59:10 | INFO | rag_main | 【接口异常】module 'httpx' has no attribute 'TimeoutError'
+2026-08-15 23:04:06 | INFO | rag_main | 【Redis关闭】Redis连接正常关闭
+2026-08-15 23:04:06 | INFO | rag_main | 【系统关闭】Redis连接已经关闭
