@@ -1,0 +1,44 @@
+{
+  "trace_id": "454697ce-e4eb-47de-95d5-4babd8e69186",
+  "name": "test_agent",
+  "session_id": "sess_001",
+  "user_query": "京剧四大名旦",
+  "metadata": {
+    "model": "qwen2:7b"
+  },
+  "start_time": "2026-08-24 01:30:31",
+  "start_ts": 1787506231.8262753,
+  "end_time": "2026-08-24 01:30:31",
+  "duration_ms": 0.0,
+  "status": "success",
+  "error": null,
+  "steps": [
+    {
+      "step": "plan",
+      "detail": "规划工具调用",
+      "metadata": {},
+      "ts": 1787506231.8262753
+    },
+    {
+      "step": "reflect",
+      "detail": "反思校验",
+      "metadata": {},
+      "ts": 1787506231.8262753
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool_name": "kb_search",
+      "params": {
+        "query": "京剧四大名旦"
+      },
+      "result": "检索到4条文档",
+      "duration_ms": 235.5,
+      "success": true,
+      "ts": 1787506231.8262753
+    }
+  ],
+  "result": {
+    "answer": "ok"
+  }
+}

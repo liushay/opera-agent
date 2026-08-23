@@ -31,6 +31,14 @@ BM25_WEIGHT = 0.4
 # 是否开启混合检索，False则降级为纯向量检索（兼容旧逻辑）
 ENABLE_HYBRID_SEARCH = True
 
+# ===================== Reranker精排配置 =====================
+# 是否启用LLM精排（BM25+向量召回→融合→精排）
+ENABLE_RERANKER = True
+# 精排模型（默认使用主LLM）
+RERANKER_MODEL = ""
+# 精排返回文档数（默认与混合检索最终K一致）
+RERANKER_TOP_K = 3
+
 # ===================== 缓存配置 =====================
 # 总开关：是否启用缓存
 ENABLE_RAG_CACHE = True

@@ -3,6 +3,7 @@ from langchain_core.documents import Document
 import config
 from rag.vectorstore.chroma_kb import kb
 from  rag.vectorstore.bm25_retriever import bm25_kb
+from rag.reranker import reranker
 from utils.logger import log_debug, log_info, log_warn, log_error
 from utils.cache_utils import get_retrieve_cache, set_retrieve_cache, delete_retrieve_cache, serialize_docs, deserialize_docs
 from utils.rag_exceptions import VectorStoreException, BM25IndexException, CacheSerializeException
@@ -93,9 +94,29 @@ def hybrid_retrieve(query: str) -> List[Document]:
         merge_list.append((doc, total))
 
     merge_list.sort(key=lambda x: x[1], reverse=True)
-    final_docs = [item[0] for item in merge_list[:config.HYBRID_FINAL_K]]
+    # 融合阶段先取候选集（略大于最终K，给精排留出选择空间）
+    candidate_docs = [item[0] for item in merge_list[:config.HYBRID_FINAL_K * 2]]
 
-    log_info("混合检索", f"向量召回{len(vec_docs)}条，BM25召回{len(bm25_pairs)}条，融合后返回{len(final_docs)}条")
+    # 精排阶段：LOOS ReRanker 对融合后的候选文档进行二次精排
+    if config.ENABLE_RERANKER and candidate_docs:
+        try:
+            final_docs = reranker.rerank(
+                query=query,
+                docs=candidate_docs,
+                top_k=config.RERANKER_TOP_K or config.HYBRID_FINAL_K,
+            )
+            log_info(
+                "混合检索",
+                f"向量召回{len(vec_docs)}条，BM25召回{len(bm25_pairs)}条，"
+                f"融合候选{len(candidate_docs)}条，精排后返回{len(final_docs)}条",
+            )
+        except Exception as e:
+            log_warn("混合检索", f"LLM精排失败，降级返回融合结果：{e}")
+            final_docs = candidate_docs[: config.HYBRID_FINAL_K]
+    else:
+        final_docs = candidate_docs[: config.HYBRID_FINAL_K]
+        log_info("混合检索", f"向量召回{len(vec_docs)}条，BM25召回{len(bm25_pairs)}条，融合后返回{len(final_docs)}条（未开启精排）")
+
     if len(final_docs) == 0:
         log_warn("混合检索", "本次检索未匹配到任何文档")
 

@@ -265,6 +265,75 @@ Agent长时间记忆采用**分层隔离存储**，禁止全部存入单一向�
 - Agent各节点自动检索三层记忆并注入提示词
 - 原有API接口、参数完全不变，向后兼容
 
+### 统一认知记忆抽象（Working/Episodic/Semantic）🆕
+
+`agent/memory/unified_memory.py` 将三层 JSON Memory 抽象为认知科学标准的三类记忆：
+
+| 认知记忆 | 物理存储 | 说明 |
+|---------|---------|------|
+| **Working Memory**（工作记忆） | 会话时序记忆 | 短期当前上下文/对话轨迹 |
+| **Episodic Memory**（情景记忆） | 任务级记忆 | 任务经历/中间产物 |
+| **Semantic Memory**（语义记忆） | 永久静态记忆 | 知识/规则/偏好 |
+
+- 提供 `retrieve_all()` / `format_context()` 统一接口
+- 完全兼容旧接口，底层存储不变
+- 供 Agent、MCP、Evaluation 统一调用
+
+## 🚀 增量升级特性（保持原有功能完全兼容）
+
+### 1. Hybrid Search + Reranker 精排 🆕
+
+检索流水线升级为：**BM25 + 向量召回 → 分数融合 → LLM Reranker 精排**
+
+- `rag/reranker/llm_reranker.py`：基于 LLM 的二次精排器（0-10 相关性评分）
+- 精排失败自动降级为关键词精排，不阻断主流程
+- 可通过 `config.ENABLE_RERANKER` 开关控制
+
+### 2. Agentic RAG 🆕
+
+`rag/agentic/` 提供完整 Agentic RAG 组件：
+
+| 组件 | 文件 | 功能 |
+|------|------|------|
+| QueryRewriter | `query_rewriter.py` | 多轮对话查询改写为独立检索查询 |
+| DocumentGrader | `document_grader.py` | 检索文档相关性评分/过滤 |
+| AnswerGrader | `answer_grader.py` | 回答忠实度/相关性校验 |
+| AutoRetriever | `auto_retriever.py` | 文档不足时自动改写查询重试 |
+
+### 3. MCP Server 🆕
+
+`mcp_server/rag_tools_mcp.py` 将核心能力封装为 4 个 MCP Tools：
+
+| 工具 | 功能 |
+|------|------|
+| `kb_search` | 混合检索知识库（含精排） |
+| `doc_get` | 获取知识库/文献文件内容 |
+| `lit_generate` | 生成戏曲文献（txt/pdf/md） |
+| `eval_rag` | 执行 RAG 检索指标评测 |
+
+运行方式：`python -m mcp_server.rag_tools_mcp`（JSON-RPC over stdio）
+
+### 4. 高级评测指标 🆕
+
+`evaluation/advanced_evaluator.py` 在基础检索指标上新增：
+
+| 指标 | 说明 |
+|------|------|
+| Faithfulness | 答案忠实度（无幻觉） |
+| Answer Relevance | 答案是否直接回答用户问题 |
+| Context Precision | 相关文档排序靠前程度 |
+| Context Recall | 相关文档是否都被召回 |
+| Agent Task Success | Agent 端到端任务成功率 |
+
+### 5. Agent Trace/Observability 🆕
+
+`agent/trace.py` 提供 Agent 调用可观测性：
+
+- 自动记录每次 Agent 调用的步骤、耗时、工具调用、错误
+- 支持装饰器 `@agent_tracer.trace()` 快速接入
+- 提供 `get_stats()` 汇总统计（调用次数/成功率/工具使用频率）
+- Trace 文件保存至 `agent_traces/` 目录，便于审计
+
 ## 🛠️ 工程化特性
 
 - ✅ **统一异常体系**：所有业务异常继承 `BaseRAGException`，包含错误码/错误信息/原始异常

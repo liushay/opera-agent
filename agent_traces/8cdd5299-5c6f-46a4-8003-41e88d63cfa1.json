@@ -1,0 +1,36 @@
+{
+  "trace_id": "8cdd5299-5c6f-46a4-8003-41e88d63cfa1",
+  "name": "test",
+  "session_id": "s1",
+  "user_query": "q1",
+  "metadata": {},
+  "start_time": "2026-08-24 01:27:30",
+  "start_ts": 1787506050.2795002,
+  "end_time": "2026-08-24 01:27:30",
+  "duration_ms": 0.0,
+  "status": "success",
+  "error": null,
+  "steps": [
+    {
+      "step": "step1",
+      "detail": "detail",
+      "metadata": {},
+      "ts": 1787506050.2795002
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool_name": "kb_search",
+      "params": {
+        "query": "x"
+      },
+      "result": "result",
+      "duration_ms": 12.5,
+      "success": true,
+      "ts": 1787506050.2795002
+    }
+  ],
+  "result": {
+    "ok": 1
+  }
+}

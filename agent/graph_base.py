@@ -11,11 +11,28 @@ from utils.logger import log_debug, log_info, log_warn, log_error
 from utils.rag_exceptions import LLMModelException, AgentFlowException, VectorStoreException, BM25IndexException
 from utils.exception_handler import global_exception_handler
 from agent.memory import memory_manager
+from agent.trace import agent_tracer
+import time as _time
 
 # 默认会话ID（用于时序记忆记录），外部可通过state传入
 DEFAULT_MEM_SESSION_ID = config.DEFAULT_SESSION_ID
 # 当前任务ID（可选用），用于任务级记忆
 DEFAULT_MEM_TASK_ID = None
+
+# 当前活跃 trace_id（由 build_agent_graph 中包装）
+# 通过简单的 thread-local 避免修改所有节点签名
+import threading
+_trace_local = threading.local()
+
+
+def set_trace(trace_id: str):
+    """设置当前线程的 trace_id（由 invoke 包装传入）"""
+    _trace_local.trace_id = trace_id
+
+
+def get_trace() -> str:
+    """获取当前线程的 trace_id"""
+    return getattr(_trace_local, "trace_id", "")
 
 class AgentState(TypedDict):
     messages: Annotated[Sequence[BaseMessage], operator.add]
@@ -66,6 +83,10 @@ def plan_tool_call(state: AgentState) -> AgentState:
         log_warn("Agent规划节点", f"记忆上下文检索失败，降级为无记忆：{e}")
         mem_context = ""
 
+    # Trace 记录
+    trace_id = get_trace()
+    if trace_id:
+        agent_tracer.add_step(trace_id, "plan_tool_call", f"规划工具调用")
     prompt = f"""
 可用工具列表：
 {tools_info}
@@ -114,19 +135,38 @@ def run_tool(state: AgentState) -> AgentState:
         memory_manager.record_tool_call(mem_session_id, tool_name, str(params))
     except Exception as e:
         log_warn("Agent工具执行节点", f"记录工具调用失败：{e}")
+    # Trace 记录工具调用（开始计时）
+    trace_id = get_trace()
+    _tool_start = _time.time()
     try:
         if tool_name == "search_knowledge_base":
             res = knowledge_tool.invoke(params)
         elif tool_name == "calculator":
             res = calc_tool.invoke(params)
     except (VectorStoreException, BM25IndexException) as e:
+        if trace_id:
+            agent_tracer.record_tool_call(
+                trace_id, tool_name, params, str(e), 
+                (_time.time() - _tool_start) * 1000, False,
+            )
         err_msg = f"工具{tool_name}底层检索失败"
         log_error("Agent工具执行异常", err_msg, e)
         raise AgentFlowException(err_msg, e)
     except Exception as e:
+        if trace_id:
+            agent_tracer.record_tool_call(
+                trace_id, tool_name, params, str(e),
+                (_time.time() - _tool_start) * 1000, False,
+            )
         err_msg = f"工具{tool_name}执行未知错误"
         log_error("Agent工具执行异常", err_msg, e)
         raise AgentFlowException(err_msg, e)
+    # Trace 记录工具调用（成功）
+    if trace_id:
+        agent_tracer.record_tool_call(
+            trace_id, tool_name, params, str(res)[:200],
+            (_time.time() - _tool_start) * 1000, True,
+        )
     # 记录工具结果（记忆增强）
     try:
         memory_manager.record_tool_result(mem_session_id, tool_name, str(res)[:500])
@@ -281,5 +321,30 @@ def build_agent_graph():
         }
     )
     graph.add_edge("generate_final_ans", END)
-    log_info("Agent构建", "单智能体流程图构建完成")
-    return graph.compile()
+    compiled = graph.compile()
+
+    # 包装 invoke：自动开启/结束 Trace（不改变返回结构）
+    orig_invoke = compiled.invoke
+
+    def traced_invoke(state: dict, *args, **kwargs):
+        session_id = state.get("mem_session_id", DEFAULT_MEM_SESSION_ID)
+        user_query = state.get("user_query", "")
+        trace_id = agent_tracer.start_trace(
+            name="single_agent",
+            session_id=str(session_id),
+            user_query=str(user_query),
+        )
+        set_trace(trace_id)
+        try:
+            result = orig_invoke(state, *args, **kwargs)
+            agent_tracer.end_trace(trace_id, status="success", result=result)
+            return result
+        except Exception as e:
+            agent_tracer.end_trace(trace_id, status="error", error=str(e))
+            raise
+        finally:
+            _trace_local.trace_id = None
+
+    compiled.invoke = traced_invoke
+    log_info("Agent构建", "单智能体流程图构建完成（已启用Trace追踪）")
+    return compiled

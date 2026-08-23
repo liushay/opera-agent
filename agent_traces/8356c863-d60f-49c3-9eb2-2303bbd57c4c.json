@@ -1,0 +1,16 @@
+{
+  "trace_id": "8356c863-d60f-49c3-9eb2-2303bbd57c4c",
+  "name": "decorated",
+  "session_id": "s2",
+  "user_query": "黄梅戏天仙配",
+  "metadata": {},
+  "start_time": "2026-08-24 01:30:31",
+  "start_ts": 1787506231.853678,
+  "end_time": "2026-08-24 01:30:31",
+  "duration_ms": 0.0,
+  "status": "success",
+  "error": null,
+  "steps": [],
+  "tool_calls": [],
+  "result": "answer_ok"
+}
