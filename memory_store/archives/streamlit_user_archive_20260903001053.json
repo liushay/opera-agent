@@ -1,0 +1,17 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-03 00:10:53",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "e7cea0af-78f7-436f-b3aa-bd514a1822d2",
+      "event_type": "tool_call",
+      "content": "调用工具：search_worker",
+      "metadata": {
+        "tool_name": "search_worker",
+        "params": "介绍一下越剧的脸谱"
+      },
+      "timestamp": "2026-09-03 00:10:23"
+    }
+  ]
+}

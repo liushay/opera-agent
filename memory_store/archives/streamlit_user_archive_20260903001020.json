@@ -1,0 +1,14 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-03 00:10:20",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "8dfc0945-59cd-40cc-aca9-29ea2cd3f43d",
+      "event_type": "thinking",
+      "content": "多Agent主管识别意图：介绍一下昆曲，并给我生成一张昆曲的脸谱",
+      "metadata": {},
+      "timestamp": "2026-09-01 20:02:45"
+    }
+  ]
+}

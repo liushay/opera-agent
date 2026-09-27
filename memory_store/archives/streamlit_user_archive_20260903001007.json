@@ -1,0 +1,14 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-03 00:10:07",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "00cb38bc-34f1-463a-a288-2924ad57f2b2",
+      "event_type": "thinking",
+      "content": "多Agent主管识别意图：介绍一下戏剧脸谱",
+      "metadata": {},
+      "timestamp": "2026-09-01 00:26:42"
+    }
+  ]
+}

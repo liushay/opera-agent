@@ -1,0 +1,19 @@
+{
+  "id": "f0ef3486-d049-4ada-a6c0-ad29d65eee08",
+  "title": "介绍一下越剧脸谱",
+  "description": "单次独立任务，用于隔离不同轮次请求，彻底解决记忆污染",
+  "requirements": "介绍一下越剧脸谱",
+  "objectives": [],
+  "constraints": [],
+  "intermediate_results": [],
+  "status": "created",
+  "parent_task_id": null,
+  "sub_task_ids": [],
+  "metadata": {
+    "session_id": "streamlit_user",
+    "source": "intent_orchestrator"
+  },
+  "created_at": "2026-09-03 00:31:54",
+  "updated_at": "2026-09-03 00:31:54",
+  "completed_at": null
+}

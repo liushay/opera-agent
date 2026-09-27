@@ -1,0 +1,19 @@
+{
+  "id": "65a90845-96bb-4e40-8e2d-1f6a58fa861f",
+  "title": "介绍一下京剧历史，再出1道京剧行当的题目",
+  "description": "单次独立任务，用于隔离不同轮次请求，彻底解决记忆污染",
+  "requirements": "介绍一下京剧历史，再出1道京剧行当的题目",
+  "objectives": [],
+  "constraints": [],
+  "intermediate_results": [],
+  "status": "created",
+  "parent_task_id": null,
+  "sub_task_ids": [],
+  "metadata": {
+    "session_id": "mem_test",
+    "source": "intent_orchestrator"
+  },
+  "created_at": "2026-09-01 00:15:24",
+  "updated_at": "2026-09-01 00:15:24",
+  "completed_at": null
+}

@@ -1,0 +1,19 @@
+{
+  "id": "25cee2e1-79c4-4437-9b04-1f8e271bd50d",
+  "title": "介绍一下京剧脸谱的颜色含义",
+  "description": "单次独立任务，用于隔离不同轮次请求，彻底解决记忆污染",
+  "requirements": "介绍一下京剧脸谱的颜色含义",
+  "objectives": [],
+  "constraints": [],
+  "intermediate_results": [],
+  "status": "created",
+  "parent_task_id": null,
+  "sub_task_ids": [],
+  "metadata": {
+    "session_id": "test_sess",
+    "source": "intent_orchestrator"
+  },
+  "created_at": "2026-09-01 00:13:15",
+  "updated_at": "2026-09-01 00:13:15",
+  "completed_at": null
+}

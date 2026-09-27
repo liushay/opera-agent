@@ -1,0 +1,19 @@
+{
+  "id": "490d248c-668a-4aa8-a55d-45eb6d97db32",
+  "title": "刚刚介绍了什么",
+  "description": "单次独立任务，用于隔离不同轮次请求，彻底解决记忆污染",
+  "requirements": "刚刚介绍了什么",
+  "objectives": [],
+  "constraints": [],
+  "intermediate_results": [],
+  "status": "created",
+  "parent_task_id": null,
+  "sub_task_ids": [],
+  "metadata": {
+    "session_id": "streamlit_user",
+    "source": "intent_orchestrator"
+  },
+  "created_at": "2026-09-01 00:32:30",
+  "updated_at": "2026-09-01 00:32:30",
+  "completed_at": null
+}

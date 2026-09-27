@@ -1,0 +1,16 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-01 23:55:29",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "bbfeae92-a4bd-4313-8362-15c8cf6bec29",
+      "event_type": "dialogue",
+      "content": "你好，官人，你可知这西湖山水还依旧，只是我憔悴难对满眼秋。",
+      "metadata": {
+        "role": "ai"
+      },
+      "timestamp": "2026-08-31 00:14:29"
+    }
+  ]
+}

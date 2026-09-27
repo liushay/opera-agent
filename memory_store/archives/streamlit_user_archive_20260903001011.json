@@ -1,0 +1,16 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-03 00:10:11",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "556117c6-bec6-4f9b-99c3-0d530c531669",
+      "event_type": "dialogue",
+      "content": "刚刚介绍了戏剧的历史发展，包括戏剧从原始歌舞时期发展到明清时期的各种戏剧形式，如正杂剧和明清传奇。",
+      "metadata": {
+        "role": "ai"
+      },
+      "timestamp": "2026-09-01 00:32:33"
+    }
+  ]
+}

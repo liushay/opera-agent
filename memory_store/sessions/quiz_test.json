@@ -1,0 +1,32 @@
+{
+  "id": "quiz_test",
+  "events": [
+    {
+      "id": "bc5caba8-8e9c-4cf1-9ae5-c6fd7caf2ea3",
+      "event_type": "thinking",
+      "content": "多Agent主管识别意图：出3道京剧行当的题",
+      "metadata": {},
+      "timestamp": "2026-09-01 00:16:50"
+    },
+    {
+      "id": "ea655646-539b-498a-9aa3-f7015d83a121",
+      "event_type": "dialogue",
+      "content": "出3道京剧行当的题",
+      "metadata": {
+        "role": "user"
+      },
+      "timestamp": "2026-09-01 00:16:59"
+    },
+    {
+      "id": "146d7c06-8940-40f6-954b-d7e5b16334a2",
+      "event_type": "dialogue",
+      "content": "好的，以下是3道关于京剧行当的题目：\n\n1. 问题：京剧中的“生”行当通常扮演什么角色？\n   A. 少年或青年男性角色\n   B. 妇女角色\n   C. 老年男性角色\n   D. 儿童角色\n   \n2. 问题：京剧中的“旦”行当通常扮演什么角色？\n   A. 少年或青年男性角色\n   B. 妇女角色\n   C. 老年男性角色\n   D. 儿童角色\n   \n3. 问题：京剧中的“净”行当通常扮演什么角色？\n   A. 少年或青年男性角色\n   B. 妇女角色\n   C. 老年男性角色\n   D. 儿童角色\n\n请根据题目选择正确答案。",
+      "metadata": {
+        "role": "ai"
+      },
+      "timestamp": "2026-09-01 00:16:59"
+    }
+  ],
+  "created_at": "2026-09-01 00:16:50",
+  "updated_at": "2026-09-01 00:16:59"
+}

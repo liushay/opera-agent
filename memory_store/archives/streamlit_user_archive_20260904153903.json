@@ -1,0 +1,14 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-04 15:39:03",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "0369800a-a080-4f1f-8166-b041c3503328",
+      "event_type": "thinking",
+      "content": "多Agent主管识别意图：介绍一下越剧的脸谱",
+      "metadata": {},
+      "timestamp": "2026-09-03 00:11:03"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-03 00:10:01",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "ddf84b2d-bea8-40c0-8dd3-6feb51c38c6a",
+      "event_type": "thinking",
+      "content": "生成脸谱画像：偏好=我喜欢蓝色，脸谱=蓝刚面",
+      "metadata": {},
+      "timestamp": "2026-08-31 20:42:53"
+    }
+  ]
+}

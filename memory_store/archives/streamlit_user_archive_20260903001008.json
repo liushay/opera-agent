@@ -1,0 +1,17 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-03 00:10:08",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "6ab47d1c-68ed-4ec6-9562-f918f1c1e4ae",
+      "event_type": "tool_call",
+      "content": "调用工具：search_knowledge_base",
+      "metadata": {
+        "tool_name": "search_knowledge_base",
+        "params": "{'query': '戏剧历史'}"
+      },
+      "timestamp": "2026-09-01 00:31:15"
+    }
+  ]
+}

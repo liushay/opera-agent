@@ -1,0 +1,19 @@
+{
+  "id": "04f8cfef-19d2-4a2b-8bc1-2e0c179bb27f",
+  "title": "介绍越剧并以穆桂英的语气回答你好",
+  "description": "单次独立任务，用于隔离不同轮次请求，彻底解决记忆污染",
+  "requirements": "介绍越剧，并以穆桂英的语气回答你好",
+  "objectives": [],
+  "constraints": [],
+  "intermediate_results": [],
+  "status": "created",
+  "parent_task_id": null,
+  "sub_task_ids": [],
+  "metadata": {
+    "session_id": "streamlit_user",
+    "source": "intent_orchestrator"
+  },
+  "created_at": "2026-09-04 21:02:48",
+  "updated_at": "2026-09-04 21:02:48",
+  "completed_at": null
+}

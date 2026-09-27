@@ -1,0 +1,14 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-03 00:10:17",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "e5628b25-faf8-40cc-9450-01d695c54c42",
+      "event_type": "thinking",
+      "content": "生成学戏课程：昆曲，8天，课程ID=course_1664，当前进度=Day0（未开始）",
+      "metadata": {},
+      "timestamp": "2026-09-01 17:05:20"
+    }
+  ]
+}

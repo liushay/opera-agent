@@ -1,0 +1,17 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-03 00:10:28",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "97b43e1b-01a4-4f1c-9003-709e20db90d4",
+      "event_type": "tool_call",
+      "content": "调用工具：search_worker",
+      "metadata": {
+        "tool_name": "search_worker",
+        "params": "用户想了解关于戏曲知识问答"
+      },
+      "timestamp": "2026-09-01 23:53:03"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "system_rules": [
+    {
+      "id": "f651e0a7-71eb-46b8-93a6-ebe77f9684dc",
+      "category": "system_rules",
+      "title": "检索质量规范",
+      "content": "知识库检索要求：1.必须优先返回与用户问题最相关的文档片段；2.禁止返回无关或低相关性内容；3.同一文档不重复返回；4.检索结果需覆盖用户问题中的关键概念。",
+      "tags": [
+        "检索",
+        "规范",
+        "RAG"
+      ],
+      "source": "system_builtin",
+      "created_at": "2026-08-23 23:57:31",
+      "updated_at": "2026-08-23 23:57:31"
+    }
+  ],
+  "domain_spec": [
+    {
+      "id": "59306f87-e9ca-479c-be01-41e93a6d0652",
+      "category": "domain_spec",
+      "title": "RAG领域知识",
+      "content": "RAG（Retrieval-Augmented Generation）检索增强生成，核心流程：文档加载→文本分割→Embedding向量化→向量库存储→检索→大模型问答。常见向量库包括Chroma、Milvus、FAISS、Redis Vector。BM25是关键词检索算法，适合精确词匹配。",
+      "tags": [
+        "RAG",
+        "向量库",
+        "BM25",
+        "分块"
+      ],
+      "source": "system_builtin",
+      "created_at": "2026-08-23 23:57:31",
+      "updated_at": "2026-08-23 23:57:31"
+    },
+    {
+      "id": "081a90dc-c11a-4a07-b900-e716e84203b7",
+      "category": "domain_spec",
+      "title": "LangGraph智能体",
+      "content": "LangGraph是LangChain生态的智能体编排框架，用于实现具备循环、分支、反思、多轮迭代逻辑的复杂Agent流程。利用图结构（StateGraph）组织节点和边，支持条件路由和状态管理。",
+      "tags": [
+        "LangGraph",
+        "Agent",
+        "图",
+        "状态"
+      ],
+      "source": "system_builtin",
+      "created_at": "2026-08-23 23:57:31",
+      "updated_at": "2026-08-23 23:57:31"
+    }
+  ],
+  "tech_docs": [
+    {
+      "id": "e56a4b52-950a-4750-85c9-6807dbe0f82d",
+      "category": "tech_docs",
+      "title": "Chroma向量库检索",
+      "content": "Chroma是本地轻量向量库，无需部署服务。使用Embedding模型将文本转为向量存入，检索时通过相似度计算（如余弦相似度、MMR）召回最相关文档。常用检索方式：similarity_search、MMR（最大边际相关性）。",
+      "tags": [
+        "Chroma",
+        "向量",
+        "检索",
+        "MMR"
+      ],
+      "source": "system_builtin",
+      "created_at": "2026-08-23 23:57:31",
+      "updated_at": "2026-08-23 23:57:31"
+    }
+  ],
+  "user_prefs": [
+    {
+      "id": "e5f33287-901e-434b-8271-fbdddac79bb4",
+      "category": "user_prefs",
+      "title": "默认回答偏好",
+      "content": "回答要求：简洁通顺，严格依据提供资料，不编造未出现的信息。",
+      "tags": [
+        "回答偏好"
+      ],
+      "source": "system_builtin",
+      "created_at": "2026-08-23 23:57:31",
+      "updated_at": "2026-08-23 23:57:31"
+    }
+  ]
+}

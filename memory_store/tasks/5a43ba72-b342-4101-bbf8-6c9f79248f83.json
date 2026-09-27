@@ -1,0 +1,19 @@
+{
+  "id": "5a43ba72-b342-4101-bbf8-6c9f79248f83",
+  "title": "介绍曹操并生成曹操的脸谱",
+  "description": "单次独立任务，用于隔离不同轮次请求，彻底解决记忆污染",
+  "requirements": "介绍一下曹操，并生成曹操的脸谱",
+  "objectives": [],
+  "constraints": [],
+  "intermediate_results": [],
+  "status": "created",
+  "parent_task_id": null,
+  "sub_task_ids": [],
+  "metadata": {
+    "session_id": "streamlit_user",
+    "source": "intent_orchestrator"
+  },
+  "created_at": "2026-09-04 20:30:27",
+  "updated_at": "2026-09-04 20:30:27",
+  "completed_at": null
+}

@@ -1,0 +1,17 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-01 23:52:59",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "c03392ec-2cf9-4977-a4a5-44d7b687dbcb",
+      "event_type": "tool_call",
+      "content": "调用工具：search_knowledge_base",
+      "metadata": {
+        "tool_name": "search_knowledge_base",
+        "params": "{'query': 'langGraph的优势'}"
+      },
+      "timestamp": "2026-08-29 23:34:08"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-01 23:53:52",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "2b461dad-4156-4fe3-9956-ecb9c4b31d02",
+      "event_type": "dialogue",
+      "content": "LangGrapg的核心优势是什么",
+      "metadata": {
+        "role": "user"
+      },
+      "timestamp": "2026-08-29 23:45:05"
+    }
+  ]
+}

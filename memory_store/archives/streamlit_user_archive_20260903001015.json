@@ -1,0 +1,16 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-03 00:10:15",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "2601fec1-8ed4-4516-8955-d64a4410e4a2",
+      "event_type": "dialogue",
+      "content": "简述一下所有戏曲脸谱都有什么",
+      "metadata": {
+        "role": "user"
+      },
+      "timestamp": "2026-09-01 16:35:36"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "8f5479ef-5267-4888-a8f4-8ff649acb17b",
+  "title": "重复一遍",
+  "description": "单次独立任务，用于隔离不同轮次请求，彻底解决记忆污染",
+  "requirements": "重复一遍",
+  "objectives": [],
+  "constraints": [],
+  "intermediate_results": [],
+  "status": "created",
+  "parent_task_id": null,
+  "sub_task_ids": [],
+  "metadata": {
+    "session_id": "streamlit_user",
+    "source": "intent_orchestrator"
+  },
+  "created_at": "2026-09-01 23:53:51",
+  "updated_at": "2026-09-01 23:53:51",
+  "completed_at": null
+}

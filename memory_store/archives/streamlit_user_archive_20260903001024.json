@@ -1,0 +1,16 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-03 00:10:24",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "d853aec0-0fb9-472d-a6ef-3d85a866a12a",
+      "event_type": "dialogue",
+      "content": "## 🎭 你的专属脸谱：巾帼英豪\n\n- **主色**：红（忠勇侠义，如关羽）\n- **图案设计**：战马纹（）\n- **气质人物**：穆桂英\n\n### 🧬 人格解读\n勇猛刚强，巾帼不让须眉，是真正的女中豪杰。\n\n### 📤 分享卡片\n巾帼英豪，红脸配战马，穆桂英的英姿飒爽，豪情万丈，她的勇猛刚强，让人敬佩。#戏曲脸谱# #穆桂英挂帅#\n\n### 🖼️ 脸谱图像（即梦AI生成）\n![巾帼英豪](/static/face_images/face_20260901235010_a79ff451.png)\n\n- 图片访问地址：`/static/face_images/face_20260901235010_a79ff451.png`\n- 本地文件路径：`D:/大学/大模型开发/agent-study-rag/literature_output/face_images/face_20260901235010_a79ff451.png`\n- image_status：`generated`",
+      "metadata": {
+        "role": "ai"
+      },
+      "timestamp": "2026-09-01 23:50:12"
+    }
+  ]
+}

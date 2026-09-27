@@ -1,0 +1,14 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-03 00:10:13",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "3e78b3cc-fa9c-410d-801b-66dafec2efb3",
+      "event_type": "thinking",
+      "content": "多Agent主管识别意图：刚刚的提问整理出一个知识闯关",
+      "metadata": {},
+      "timestamp": "2026-09-01 16:34:14"
+    }
+  ]
+}

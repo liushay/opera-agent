@@ -1,0 +1,19 @@
+{
+  "id": "cdb816b2-8cfe-44d2-9658-190fd9167cf7",
+  "title": "请只介绍京剧的历史沿革",
+  "description": "单次独立任务，用于隔离不同轮次请求，彻底解决记忆污染",
+  "requirements": "请只介绍京剧的历史沿革",
+  "objectives": [],
+  "constraints": [],
+  "intermediate_results": [],
+  "status": "created",
+  "parent_task_id": null,
+  "sub_task_ids": [],
+  "metadata": {
+    "session_id": "test_sess",
+    "source": "intent_orchestrator"
+  },
+  "created_at": "2026-09-01 00:14:47",
+  "updated_at": "2026-09-01 00:14:47",
+  "completed_at": null
+}

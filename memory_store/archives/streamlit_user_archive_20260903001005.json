@@ -1,0 +1,14 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-03 00:10:05",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "b40f0a61-f501-4f0d-a579-a5b9810883c4",
+      "event_type": "thinking",
+      "content": "多Agent主管识别意图：讲述一下戏剧发展历史，并且生成一个知识闯关",
+      "metadata": {},
+      "timestamp": "2026-08-31 23:00:30"
+    }
+  ]
+}

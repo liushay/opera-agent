@@ -1,0 +1,19 @@
+{
+  "id": "c3761bd0-1d07-4c5b-a285-58b245d3da70",
+  "title": "举例几个京剧",
+  "description": "单次独立任务，用于隔离不同轮次请求，彻底解决记忆污染",
+  "requirements": "举例几个京剧",
+  "objectives": [],
+  "constraints": [],
+  "intermediate_results": [],
+  "status": "created",
+  "parent_task_id": null,
+  "sub_task_ids": [],
+  "metadata": {
+    "session_id": "streamlit_user",
+    "source": "intent_orchestrator"
+  },
+  "created_at": "2026-09-04 18:37:30",
+  "updated_at": "2026-09-04 18:37:30",
+  "completed_at": null
+}

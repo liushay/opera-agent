@@ -1,0 +1,19 @@
+{
+  "id": "f68ad981-8829-4b11-b1c2-bd8a5209c61b",
+  "title": "介绍一下越剧，生成一张越剧有关的脸谱",
+  "description": "单次独立任务，用于隔离不同轮次请求，彻底解决记忆污染",
+  "requirements": "介绍一下越剧，生成一张越剧有关的脸谱",
+  "objectives": [],
+  "constraints": [],
+  "intermediate_results": [],
+  "status": "created",
+  "parent_task_id": null,
+  "sub_task_ids": [],
+  "metadata": {
+    "session_id": "streamlit_user",
+    "source": "intent_orchestrator"
+  },
+  "created_at": "2026-09-01 21:41:30",
+  "updated_at": "2026-09-01 21:41:30",
+  "completed_at": null
+}

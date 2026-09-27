@@ -1,0 +1,19 @@
+{
+  "id": "980b75f7-f7da-4d80-9754-dc635b9b3943",
+  "title": "以曹操的语气回答你好",
+  "description": "单次独立任务，用于隔离不同轮次请求，彻底解决记忆污染",
+  "requirements": "以曹操的语气回答你好",
+  "objectives": [],
+  "constraints": [],
+  "intermediate_results": [],
+  "status": "created",
+  "parent_task_id": null,
+  "sub_task_ids": [],
+  "metadata": {
+    "session_id": "streamlit_user",
+    "source": "intent_orchestrator"
+  },
+  "created_at": "2026-09-04 17:10:56",
+  "updated_at": "2026-09-04 17:10:56",
+  "completed_at": null
+}

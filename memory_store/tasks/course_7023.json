@@ -1,0 +1,19 @@
+{
+  "id": "course_7023",
+  "title": "制定一个关于京剧历史的学习课程7天学戏课程",
+  "description": "用户制定的7天制定一个关于京剧历史的学习课程学戏计划",
+  "requirements": "",
+  "objectives": [
+    "完成7天课程",
+    "掌握制定一个关于京剧历史的学习课程基础"
+  ],
+  "constraints": [],
+  "intermediate_results": [],
+  "status": "created",
+  "parent_task_id": null,
+  "sub_task_ids": [],
+  "metadata": {},
+  "created_at": "2026-09-01 00:15:31",
+  "updated_at": "2026-09-01 00:15:31",
+  "completed_at": null
+}

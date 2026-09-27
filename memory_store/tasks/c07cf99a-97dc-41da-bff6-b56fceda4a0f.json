@@ -1,0 +1,19 @@
+{
+  "id": "c07cf99a-97dc-41da-bff6-b56fceda4a0f",
+  "title": "请只介绍京剧的历史，不要出题也不要课程",
+  "description": "单次独立任务，用于隔离不同轮次请求，彻底解决记忆污染",
+  "requirements": "请只介绍京剧的历史，不要出题也不要课程",
+  "objectives": [],
+  "constraints": [],
+  "intermediate_results": [],
+  "status": "created",
+  "parent_task_id": null,
+  "sub_task_ids": [],
+  "metadata": {
+    "session_id": "mem_test",
+    "source": "intent_orchestrator"
+  },
+  "created_at": "2026-09-01 00:16:10",
+  "updated_at": "2026-09-01 00:16:10",
+  "completed_at": null
+}

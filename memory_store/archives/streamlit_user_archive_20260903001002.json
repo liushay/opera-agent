@@ -1,0 +1,14 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-03 00:10:02",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "8599c0ee-e7f6-4693-abc6-379626acde3b",
+      "event_type": "thinking",
+      "content": "规划阶段：用户提问讲述一下戏剧历史",
+      "metadata": {},
+      "timestamp": "2026-08-31 22:59:12"
+    }
+  ]
+}

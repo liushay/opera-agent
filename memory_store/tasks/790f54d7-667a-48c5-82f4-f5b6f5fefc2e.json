@@ -1,0 +1,19 @@
+{
+  "id": "790f54d7-667a-48c5-82f4-f5b6f5fefc2e",
+  "title": "以简洁方式介绍戏剧历史",
+  "description": "单次独立任务，用于隔离不同轮次请求，彻底解决记忆污染",
+  "requirements": "介绍一下戏剧历史",
+  "objectives": [],
+  "constraints": [],
+  "intermediate_results": [],
+  "status": "created",
+  "parent_task_id": null,
+  "sub_task_ids": [],
+  "metadata": {
+    "session_id": "streamlit_user",
+    "source": "intent_orchestrator"
+  },
+  "created_at": "2026-09-04 21:40:42",
+  "updated_at": "2026-09-04 21:40:42",
+  "completed_at": null
+}

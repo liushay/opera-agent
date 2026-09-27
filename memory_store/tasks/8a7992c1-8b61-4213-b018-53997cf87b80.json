@@ -1,0 +1,19 @@
+{
+  "id": "8a7992c1-8b61-4213-b018-53997cf87b80",
+  "title": "介绍一下戏剧历史，以关羽的口吻回答再见",
+  "description": "单次独立任务，用于隔离不同轮次请求，彻底解决记忆污染",
+  "requirements": "介绍一下戏剧历史，以关羽的口吻回答再见",
+  "objectives": [],
+  "constraints": [],
+  "intermediate_results": [],
+  "status": "created",
+  "parent_task_id": null,
+  "sub_task_ids": [],
+  "metadata": {
+    "session_id": "streamlit_user",
+    "source": "intent_orchestrator"
+  },
+  "created_at": "2026-09-04 15:33:08",
+  "updated_at": "2026-09-04 15:33:08",
+  "completed_at": null
+}

@@ -1,0 +1,29 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# 运行生成目录
+# 文献输出根目录（按类型分子文件夹）
+literature_output/
+# 评测报告目录
+evaluation_report/
+# 上传临时目录
+uploads/
+# Chroma向量库持久化
+chroma_db/
+# 日志文件
+logs/
+*.log
+
+# Agent Trace 运行时输出
+agent_traces/
+
+# 环境变量
+.env

@@ -1,0 +1,16 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-01 23:53:51",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "dc677286-28db-485c-b04d-cebbb72d7d84",
+      "event_type": "tool_result",
+      "content": "文档片段：LangChain 是一套面向大模型应用开发的标准化组件库，封装了文档加载、文本切分、向量存储、提示词管理、基础问答链等全套模块化工具，开发者无需从零编写底层逻辑，来源：{'source': 'test.txt'}\n文档片段：Agent 智能体是依托大语言模型作为核心推理底座，融合外部工具调用能力、私有知识库检索能力构建而成的智能化应用程序，来源：{'source': 'test.txt'}\n文档片段：京剧表演程式是中国戏曲表演体系的核心，是京剧艺术区别于其他戏剧形式的根本特征。，来源：{'source': './knowledge_base/opera\\\\京剧_表演程式研究.txt'}",
+      "metadata": {
+        "tool_name": "search_knowledge_base"
+      },
+      "timestamp": "2026-08-29 23:44:56"
+    }
+  ]
+}

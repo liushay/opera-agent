@@ -1,0 +1,16 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-04 20:34:18",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "37d75029-50ec-4d0a-b6b9-272fc53e1d53",
+      "event_type": "tool_result",
+      "content": "一、脸谱的起源与发展\n二、脸谱的色彩体系\n五、脸谱的文化价值",
+      "metadata": {
+        "tool_name": "search_worker"
+      },
+      "timestamp": "2026-09-03 00:11:09"
+    }
+  ]
+}

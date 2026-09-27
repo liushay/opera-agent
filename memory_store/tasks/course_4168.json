@@ -1,0 +1,19 @@
+{
+  "id": "course_4168",
+  "title": "制定一个关于京剧历史沿革的学习课程或路线7天学戏课程",
+  "description": "用户制定的7天制定一个关于京剧历史沿革的学习课程或路线学戏计划",
+  "requirements": "",
+  "objectives": [
+    "完成7天课程",
+    "掌握制定一个关于京剧历史沿革的学习课程或路线基础"
+  ],
+  "constraints": [],
+  "intermediate_results": [],
+  "status": "created",
+  "parent_task_id": null,
+  "sub_task_ids": [],
+  "metadata": {},
+  "created_at": "2026-09-01 00:14:56",
+  "updated_at": "2026-09-01 00:14:56",
+  "completed_at": null
+}

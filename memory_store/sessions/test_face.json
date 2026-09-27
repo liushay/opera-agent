@@ -1,0 +1,14 @@
+{
+  "id": "test_face",
+  "events": [
+    {
+      "id": "5395c94f-0d5a-4b7e-acc6-a7066354915b",
+      "event_type": "thinking",
+      "content": "生成脸谱画像：偏好=红色，代表忠义，脸谱=忠义赤面",
+      "metadata": {},
+      "timestamp": "2026-08-31 19:03:00"
+    }
+  ],
+  "created_at": "2026-08-31 19:03:00",
+  "updated_at": "2026-08-31 19:03:00"
+}

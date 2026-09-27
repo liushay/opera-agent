@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Black">
+    <option name="sdkName" value="Python 3.11 (Agent_Study_Day1)" />
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 virtualenv at D:\大学\大模型开发\agent-study-rag\.venv" project-jdk-type="Python SDK" />
+  <component name="PythonCompatibilityInspectionAdvertiser">
+    <option name="version" value="3" />
+  </component>
+</project>

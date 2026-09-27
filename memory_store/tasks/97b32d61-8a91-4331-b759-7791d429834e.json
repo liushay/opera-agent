@@ -1,0 +1,19 @@
+{
+  "id": "97b32d61-8a91-4331-b759-7791d429834e",
+  "title": "出3道京剧行当的题",
+  "description": "单次独立任务，用于隔离不同轮次请求，彻底解决记忆污染",
+  "requirements": "出3道京剧行当的题",
+  "objectives": [],
+  "constraints": [],
+  "intermediate_results": [],
+  "status": "created",
+  "parent_task_id": null,
+  "sub_task_ids": [],
+  "metadata": {
+    "session_id": "quiz_test",
+    "source": "intent_orchestrator"
+  },
+  "created_at": "2026-09-01 00:16:50",
+  "updated_at": "2026-09-01 00:16:50",
+  "completed_at": null
+}

@@ -1,0 +1,16 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-01 23:55:21",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "53d89154-da11-473c-b09b-291edd993c55",
+      "event_type": "dialogue",
+      "content": "你好",
+      "metadata": {
+        "role": "user"
+      },
+      "timestamp": "2026-08-31 00:14:28"
+    }
+  ]
+}

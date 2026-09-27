@@ -1,0 +1,16 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-03 00:10:21",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "3c9d0bb7-aa9a-47b2-be05-3dd9483525cc",
+      "event_type": "dialogue",
+      "content": "大哥并我要给我生成一张昆曲的脸谱",
+      "metadata": {
+        "role": "user"
+      },
+      "timestamp": "2026-09-01 20:03:57"
+    }
+  ]
+}

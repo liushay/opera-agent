@@ -1,0 +1,16 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-01 23:53:03",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "002c4208-2527-449a-9b3a-f3a0da65fb70",
+      "event_type": "dialogue",
+      "content": "langGraph的优势是什么",
+      "metadata": {
+        "role": "user"
+      },
+      "timestamp": "2026-08-29 23:34:18"
+    }
+  ]
+}

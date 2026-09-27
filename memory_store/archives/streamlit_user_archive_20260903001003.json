@@ -1,0 +1,16 @@
+{
+  "id": "streamlit_user",
+  "archived_at": "2026-09-03 00:10:03",
+  "event_count": 1,
+  "events": [
+    {
+      "id": "24c52658-1179-478d-86b7-6d5013b0a5da",
+      "event_type": "tool_result",
+      "content": "文档片段：轻松诙谐、短小精悍的表演，起到暖场和吸引观众注意力的作用，如一些简单的滑稽短剧或歌舞表演，让观众迅速融入演出氛围。正杂剧是整个演出的核心部分，集中展现主要的故事情节和戏剧冲突，内容广泛，涵盖了历史故事、民间传说、社会生活的方方面面。例如，有，来源：{'source': './uploads\\\\戏曲历史起源.txt'}\n文档片段：明清传奇：戏曲的持续繁荣与创新，来源：{'source': './uploads\\\\戏曲历史起源.txt'}\n文档片段：一、历史故事原型，来源：{'source': './knowledge_base/opera\\\\秦腔_赵氏孤儿艺术.txt'}",
+      "metadata": {
+        "tool_name": "search_knowledge_base"
+      },
+      "timestamp": "2026-08-31 22:59:14"
+    }
+  ]
+}

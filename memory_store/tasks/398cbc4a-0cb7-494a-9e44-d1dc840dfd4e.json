@@ -1,0 +1,19 @@
+{
+  "id": "398cbc4a-0cb7-494a-9e44-d1dc840dfd4e",
+  "title": "介绍一下昆曲，生成一张昆曲的脸谱",
+  "description": "单次独立任务，用于隔离不同轮次请求，彻底解决记忆污染",
+  "requirements": "介绍一下昆曲，生成一张昆曲的脸谱",
+  "objectives": [],
+  "constraints": [],
+  "intermediate_results": [],
+  "status": "created",
+  "parent_task_id": null,
+  "sub_task_ids": [],
+  "metadata": {
+    "session_id": "streamlit_user",
+    "source": "intent_orchestrator"
+  },
+  "created_at": "2026-09-01 20:00:08",
+  "updated_at": "2026-09-01 20:00:08",
+  "completed_at": null
+}
